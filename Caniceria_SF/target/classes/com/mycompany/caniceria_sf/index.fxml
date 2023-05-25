@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.IndexController">
+   <children>
+      <Pane prefHeight="550.0" prefWidth="241.0" style="-fx-background-color: #A50104; -fx-border-color: white;">
+         <children>
+            <Button layoutX="144.0" layoutY="510.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" style="-fx-background-color: #020202;" text="Salir" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Button>
+            <Label layoutX="38.0" layoutY="116.0" text="Menú de opciones" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="17.0" />
+               </font>
+            </Label>
+            <Button layoutX="32.0" layoutY="161.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="177.0" style="-fx-background-color: White; -fx-background-radius: 10;" text="Venta de carne">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button layoutX="32.0" layoutY="219.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="177.0" style="-fx-background-color: White; -fx-background-radius: 10;" text="Inventario">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button layoutX="32.0" layoutY="275.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="177.0" style="-fx-background-color: White; -fx-background-radius: 10;" text="Comprar Res">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button layoutX="32.0" layoutY="332.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="177.0" style="-fx-background-color: White; -fx-background-radius: 10;" text="Compra insumos">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button layoutX="32.0" layoutY="388.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="177.0" style="-fx-background-color: White; -fx-background-radius: 10;" text="Finanzas">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button layoutX="32.0" layoutY="446.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="177.0" style="-fx-background-color: White; -fx-background-radius: 10;" text="Productos">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="109.0" fitWidth="108.0" layoutX="58.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../UPB/VII/Emprendimiento/lOGO.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="241.0" prefHeight="123.0" prefWidth="560.0" style="-fx-background-color: #A50104; -fx-border-color: White;">
+         <children>
+            <Label layoutX="70.0" layoutY="48.0" text="CARNICERIA LA CARRERA" textFill="#eaf0ce">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label id="lbl_username" fx:id="lbl_username" layoutX="446.0" layoutY="88.0" prefHeight="21.0" prefWidth="100.0" text="UserName" textFill="#eaf0ce">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="383.0" layoutY="87.0" prefHeight="21.0" prefWidth="48.0" text="Hola," textFill="#eaf0ce">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="241.0" layoutY="123.0" prefHeight="427.0" prefWidth="560.0">
+         <children>
+            <TabPane prefHeight="427.0" prefWidth="560.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Venta carne">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="14.0" layoutY="14.0" text="Codigo">
+                                 <font>
+                                    <Font name="Arial" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="132.0" layoutY="14.0" prefHeight="20.0" prefWidth="83.0" text="Producto">
+                                 <font>
+                                    <Font name="Arial" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="280.0" layoutY="14.0" prefHeight="20.0" prefWidth="83.0" text="Cantidad">
+                                 <font>
+                                    <Font name="Arial" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="380.0" layoutY="14.0" prefHeight="20.0" prefWidth="62.0" text="Precio">
+                                 <font>
+                                    <Font name="Arial" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btnAgregarProducto" layoutX="463.0" layoutY="7.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="83.0" style="-fx-background-color: #04F06A; -fx-background-radius: 10;" text="Agregar" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="14.0" />
+                                 </font>
+                              </Button>
+                              <TextField fx:id="txtCodgoProductoVenta" layoutX="14.0" layoutY="54.0" prefHeight="25.0" prefWidth="83.0" />
+                              <TextField fx:id="txtProducto" layoutX="132.0" layoutY="54.0" prefHeight="25.0" prefWidth="120.0" />
+                              <TextField fx:id="txtCantidadProducto" layoutX="280.0" layoutY="54.0" prefHeight="25.0" prefWidth="83.0" />
+                              <TextField fx:id="txtPrecioProducto" layoutX="380.0" layoutY="54.0" prefHeight="25.0" prefWidth="100.0" />
+                              <TableView layoutX="14.0" layoutY="100.0" prefHeight="215.0" prefWidth="532.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="CODIGO" />
+                                  <TableColumn prefWidth="238.0" text="PRODUCTO" />
+                                    <TableColumn prefWidth="108.0" text="CANTIDAD" />
+                                    <TableColumn prefWidth="109.0" text="PRECIO" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="btnImprimirFactura" layoutX="463.0" layoutY="336.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="83.0" style="-fx-background-color: #208AAE; -fx-background-radius: 10;" text="Imprimir" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Label layoutX="14.0" layoutY="328.0" text="Total a pagar">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblTotal" layoutX="14.0" layoutY="356.0" prefHeight="20.0" prefWidth="100.0" text="\$ 0.00">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="280.0" layoutY="330.0" text="Cliente">
+                                 <font>
+                                    <Font name="Arial Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtClienteVenta" layoutX="280.0" layoutY="354.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                </Tab>
+                <Tab text="Productos">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="26.0" layoutY="43.0" text="Codigo">
+                                 <font>
+                                    <Font name="Arial" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="26.0" layoutY="87.0" text="Nombre">
+                                 <font>
+                                    <Font name="Arial" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="26.0" layoutY="134.0" text="Precio">
+                                 <font>
+                                    <Font name="Arial" size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtCodigoProductoReg" layoutX="105.0" layoutY="41.0" />
+                              <TextField fx:id="txtProductoReg" layoutX="103.0" layoutY="85.0" />
+                              <TextField fx:id="txtPrecioReg" layoutX="103.0" layoutY="132.0" />
+                              <TableView layoutX="278.0" layoutY="32.0" prefHeight="329.0" prefWidth="263.0">
+                                <columns>
+                                  <TableColumn prefWidth="64.0" text="CODIGO" />
+                                  <TableColumn prefWidth="111.0" text="PRODUCTO" />
+                                    <TableColumn prefWidth="87.0" text="PRECIO" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="btnAgregarReg" layoutX="29.0" layoutY="187.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #04F06A; -fx-background-radius: 8;" text="Agregar" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnEliminarReg" layoutX="152.0" layoutY="187.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #A50104; -fx-background-radius: 8;" text="Eliminar" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnImprimirReg" layoutX="152.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #208AAE; -fx-background-radius: 8;" text="Imprimir" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnExcel" layoutX="29.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #04F06A; -fx-background-radius: 8;" text="Hoja Excel" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                </Tab>
+                  <Tab text="Inventario">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TableView layoutX="21.0" layoutY="69.0" prefHeight="200.0" prefWidth="519.0">
+                                <columns>
+                                  <TableColumn prefWidth="57.0" text="ID Venta" />
+                                  <TableColumn prefWidth="100.0" text="Fecha" />
+                                    <TableColumn prefWidth="100.0" text="Vendedor" />
+                                    <TableColumn prefWidth="105.0" text="Producto" />
+                                    <TableColumn prefWidth="69.0" text="Cantidad" />
+                                    <TableColumn prefWidth="87.0" text="Total" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="btnInventarioPDF" layoutX="21.0" layoutY="23.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="69.0" style="-fx-background-color: #A50104; -fx-background-radius: 10;" text="PDF" textFill="WHITE" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Compra res">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="14.0" layoutY="35.0" prefHeight="20.0" prefWidth="114.0" text="Tipo de animal">
+                                 <font>
+                                    <Font name="Arial" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="79.0" prefHeight="20.0" prefWidth="114.0" text="Peso (arrobas)">
+                                 <font>
+                                    <Font name="Arial" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="121.0" prefHeight="20.0" prefWidth="114.0" text="Precio arroba">
+                                 <font>
+                                    <Font name="Arial" size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtPesoArroba" layoutX="144.0" layoutY="77.0" />
+                              <TextField fx:id="txtPrecioArroba" layoutX="144.0" layoutY="119.0" />
+                              <SplitMenuButton fx:id="cbxTipoAnimal" layoutX="144.0" layoutY="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="---">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" text="Res" />
+                                  <MenuItem mnemonicParsing="false" text="Cerdo" />
+                                </items>
+                              </SplitMenuButton>
+                              <TableView layoutX="19.0" layoutY="223.0" prefHeight="143.0" prefWidth="523.0">
+                                <columns>
+                                  <TableColumn prefWidth="55.0" text="Tipo" />
+                                  <TableColumn prefWidth="69.0" text="Peso" />
+                                    <TableColumn prefWidth="98.0" text="Precio" />
+                                    <TableColumn prefWidth="200.0" text="Proveedor" />
+                                    <TableColumn prefWidth="100.0" text="Fecha" />
+                                </columns>
+                              </TableView>
+                              <Label layoutX="14.0" layoutY="170.0" prefHeight="20.0" prefWidth="114.0" text="Fecha">
+                                 <font>
+                                    <Font name="Arial" size="16.0" />
+                                 </font>
+                              </Label>
+                              <DatePicker fx:id="lblFechaCompra" layoutX="144.0" layoutY="168.0" prefHeight="25.0" prefWidth="148.0" />
+                              <Label layoutX="346.0" layoutY="36.0" prefHeight="20.0" prefWidth="114.0" text="Proveedor">
+                                 <font>
+                                    <Font name="Arial" size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtProveedor" layoutX="346.0" layoutY="77.0" prefHeight="25.0" prefWidth="190.0" />
+                              <Button fx:id="btnAgregarCompra" layoutX="346.0" layoutY="129.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #04F06A; -fx-background-radius: 8;" text="Agregar" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnImprimirCompra" layoutX="446.0" layoutY="129.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #208AAE; -fx-background-radius: 8;" text="Imprimir" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
