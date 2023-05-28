@@ -7,6 +7,7 @@ module com.mycompany.caniceria_sf {
 
     opens com.mycompany.caniceria_sf to javafx.fxml;
     opens controllers to javafx.fxml;
+    opens models to javafx.base;
     exports com.mycompany.caniceria_sf;
     exports  controllers;
 }

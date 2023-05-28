@@ -55,7 +55,7 @@
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="32.0" layoutY="446.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="177.0" style="-fx-background-color: White; -fx-background-radius: 10;" text="Productos">
+            <Button fx:id="btnProductos" layoutX="32.0" layoutY="446.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="177.0" style="-fx-background-color: White; -fx-background-radius: 10;" text="Productos">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
@@ -170,32 +170,25 @@
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="26.0" layoutY="134.0" text="Precio">
+                              <Label layoutX="26.0" layoutY="134.0" text="Precio (Lb)">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="txtCodigoProductoReg" layoutX="105.0" layoutY="41.0" />
-                              <TextField fx:id="txtProductoReg" layoutX="103.0" layoutY="85.0" />
-                              <TextField fx:id="txtPrecioReg" layoutX="103.0" layoutY="132.0" />
-                              <TableView layoutX="278.0" layoutY="32.0" prefHeight="329.0" prefWidth="263.0">
-                                <columns>
-                                  <TableColumn prefWidth="64.0" text="CODIGO" />
-                                  <TableColumn prefWidth="111.0" text="PRODUCTO" />
-                                    <TableColumn prefWidth="87.0" text="PRECIO" />
-                                </columns>
-                              </TableView>
-                              <Button fx:id="btnAgregarReg" layoutX="29.0" layoutY="187.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #04F06A; -fx-background-radius: 8;" text="Agregar" textFill="WHITE">
+                              <TextField fx:id="txtCodigoProductoReg" layoutX="113.0" layoutY="41.0" />
+                              <TextField fx:id="txtProductoReg" layoutX="113.0" layoutY="85.0" />
+                              <TextField fx:id="txtPrecioReg" layoutX="113.0" layoutY="132.0" />
+                              <Button fx:id="btnAgregarReg" layoutX="29.0" layoutY="187.0" mnemonicParsing="false" onAction="#verificarRegProduct" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #04F06A; -fx-background-radius: 8;" text="Agregar" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnEliminarReg" layoutX="152.0" layoutY="187.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #A50104; -fx-background-radius: 8;" text="Eliminar" textFill="WHITE">
+                              <Button fx:id="btnEliminarReg" layoutX="162.0" layoutY="187.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #A50104; -fx-background-radius: 8;" text="Eliminar" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnImprimirReg" layoutX="152.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #208AAE; -fx-background-radius: 8;" text="Imprimir" textFill="WHITE">
+                              <Button fx:id="btnImprimirReg" layoutX="162.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #208AAE; -fx-background-radius: 8;" text="Imprimir" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
@@ -205,6 +198,13 @@
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
                               </Button>
+                              <TableView fx:id="tableProduct" layoutX="278.0" layoutY="32.0" prefHeight="329.0" prefWidth="263.0">
+                                <columns>
+                                  <TableColumn fx:id="codigoColumn" prefWidth="64.0" text="CODIGO" />
+                                    <TableColumn fx:id="precioColumn" prefWidth="87.0" text="PRECIO" />
+                                  <TableColumn fx:id="productoColumn" prefWidth="111.0" text="PRODUCTO" />
+                                </columns>
+                              </TableView>
                            </children>
                         </AnchorPane>
                      </content>
