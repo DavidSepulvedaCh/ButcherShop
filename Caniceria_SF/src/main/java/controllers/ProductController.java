@@ -24,7 +24,7 @@ public class ProductController {
     PreparedStatement consulta;
     ResultSet rta;
     ProductModel pro = new ProductModel();
-    
+
     public boolean registerProduct(ProductModel prModel) throws SQLException {
         String vld = "SELECT * FROM productos WHERE codigo = ?";
         conBD = con.getConnection();
@@ -82,8 +82,4 @@ public class ProductController {
         }
         return productList;
     }
-
-
-
-
 }

@@ -1,21 +1,31 @@
 package models;
 
-public class BuyRes {
+public class BuyResModel {
+    private String id;
     private String tipoAnimal;
     private String pesoArrobas;
     private String precioArroba;
     private String fechaCompra;
     private String proveedor;
 
-    public BuyRes() {
+    public BuyResModel() {
     }
 
-    public BuyRes(String tipoAnimal, String pesoArrobas, String precioArroba, String fechaCompra, String proveedor) {
+    public BuyResModel(String id, String tipoAnimal, String pesoArrobas, String precioArroba, String fechaCompra, String proveedor) {
+        this.id = id;
         this.tipoAnimal = tipoAnimal;
         this.pesoArrobas = pesoArrobas;
         this.precioArroba = precioArroba;
         this.fechaCompra = fechaCompra;
         this.proveedor = proveedor;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTipoAnimal() {
