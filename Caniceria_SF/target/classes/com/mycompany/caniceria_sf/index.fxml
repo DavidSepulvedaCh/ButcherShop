@@ -119,7 +119,7 @@
                                     <Font name="Arial Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <TextField fx:id="txtCodgoProductoVenta" layoutX="14.0" layoutY="54.0" prefHeight="25.0" prefWidth="83.0" />
+                              <TextField fx:id="txtCodgoProductoVenta" layoutX="14.0" layoutY="54.0" onKeyPressed="#enterCode" prefHeight="25.0" prefWidth="83.0" />
                               <TextField fx:id="txtProducto" layoutX="123.0" layoutY="54.0" prefHeight="25.0" prefWidth="137.0" />
                               <TextField fx:id="txtCantidadProducto" layoutX="280.0" layoutY="54.0" prefHeight="25.0" prefWidth="123.0" />
                               <TextField fx:id="txtPrecioProducto" layoutX="429.0" layoutY="54.0" prefHeight="25.0" prefWidth="139.0" />
@@ -183,7 +183,7 @@
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnEliminarReg" layoutX="190.0" layoutY="187.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #A50104; -fx-background-radius: 8;" text="Eliminar" textFill="WHITE">
+                              <Button fx:id="btnEliminarReg" layoutX="190.0" layoutY="187.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #A50104; -fx-background-radius: 8;" text="Eliminar" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>

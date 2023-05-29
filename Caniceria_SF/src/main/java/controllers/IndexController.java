@@ -5,8 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import models.BuyResModel;
+import models.ConnectionBD;
 import models.InsumoModel;
 import models.ProductModel;
 import controllers.InsumoController;
@@ -14,17 +16,23 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.sql.SQLException;
+//import java.awt.event.KeyEvent;
+import java.sql.*;
 import java.time.LocalDate;
 
 public class IndexController {
     @FXML
     private Label lbl_username;
-
+    @FXML
+    private TextField txtCantidadProducto;
+    @FXML
+    private TextField txtPrecioProducto;
     @FXML
     private TextField txtCodigoProductoReg;
     @FXML
@@ -52,6 +60,8 @@ public class IndexController {
     private DatePicker lblFechaCompra;
     @FXML
     private ComboBox cbxTipoAnimal;
+    @FXML
+    private  TextField txtCodgoProductoVenta;
     @FXML
     private TableView<BuyResModel> tableBuyRes;
     @FXML
@@ -91,7 +101,11 @@ public class IndexController {
     @FXML
     private TextArea txtDescripcionInsumo;
     @FXML
+    private TextField txtProducto;
+    @FXML
     private TabPane tabPane;
+    private String idProducto = "";
+    private String nombreProducto;
 
 
     public IndexController() {
@@ -130,43 +144,88 @@ public class IndexController {
         fechaInsumoColumn.setCellValueFactory(new PropertyValueFactory<>("fechaInsumo"));
         descripcionInsumoColumn.setCellValueFactory(new PropertyValueFactory<>("descripcionInsumo"));
 
-
         // Agrega la lista de productos a la tabla
         tableProduct.setItems(productList);
         tableBuyRes.setItems(purchasesList);
         tableBuyInsumo.setItems(insumosList);
-
-        /*for (InsumoModel insu : insumosList) {
-            System.out.println("Id: " + insu.getId());
-            System.out.println("Nombre: " + insu.getNombreInsumo());
-            System.out.println("Cantidad: " + insu.getCantidadInsumo());
-            System.out.println("Precio: " + insu.getPrecioInsumo());
-            System.out.println("Proveedor: " + insu.getProveedorInsumo());
-            System.out.println("Fecha: "+ insu.getFechaInsumo());
-            System.out.println("------------------------");
-        }*/
 
     }
     @FXML
     public void getValues(MouseEvent mouseEvent){
         ProductModel fila = tableProduct.getSelectionModel().getSelectedItem();
         if (fila != null) {
-            
-            String id = fila.getId();
+            idProducto = fila.getId();
             String codigo = fila.getCodigo();
-            String nombre = fila.getNombre();
+            nombreProducto = fila.getNombre();
             String precio = fila.getPrecio();
 
-            System.out.println("Valor id: " + id);
-            System.out.println("Valor codigo: " + codigo);
-            System.out.println("Valor nombre: " + nombre);
-            System.out.println("Valor precio: " + precio);
-            System.out.printf("==================================\n");
+
         } else {
 
             System.out.println("No se ha seleccionado ninguna fila.");
         }
     }
+
+    public void deleteProduct (){
+        if(idProducto != ""){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmar Acción");
+            alert.setHeaderText("¿Estás seguro de que deseas elimnar el producto "+ nombreProducto + " ?");
+
+            ButtonType buttonTypeYes = new ButtonType("Eliminar");
+            ButtonType buttonTypeNo = new ButtonType("Cancelar");
+
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+            alert.showAndWait().ifPresent(response -> {
+                if (response == buttonTypeYes) {
+                    Connection conBD;
+                    PreparedStatement consulta;
+                    ResultSet rta;
+                    ConnectionBD con = new ConnectionBD();
+                    String sql = "DELETE FROM productos WHERE id = ?";
+                    try{
+                        conBD = con.getConnection();
+                        consulta = conBD.prepareStatement(sql);
+                        consulta.setString(1, idProducto);
+                        consulta.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "El producto se eliminó exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                        updateProducts();
+                    }catch (SQLException e){
+                        System.out.println(e.toString());
+                    }
+                } else {
+                    System.out.println("Acción cancelada por el usuario.");
+                }
+            });
+        }else{
+            JOptionPane.showMessageDialog(null, "No has seleccionado un producto", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+    @FXML
+    public void enterCode(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            System.out.println("=====ENTER=====");
+            if (!"".equals(txtCodgoProductoVenta.getText())) {
+                String code = txtCodgoProductoVenta.getText();
+                if (productController.searchProduct(code).getNombre() != null) {
+                    txtProducto.setText("" + productController.searchProduct(code).getNombre());
+                    txtPrecioProducto.setText("" + productController.searchProduct(code).getPrecio());
+                    txtCantidadProducto.requestFocus();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Codigo no registrado", "Error", JOptionPane.ERROR_MESSAGE);
+                    txtProducto.setText("");
+                    txtCantidadProducto.setText("");
+                    txtPrecioProducto.setText("");
+                    txtCodgoProductoVenta.setText("");
+                    txtCodgoProductoVenta.requestFocus();
+                }
+            }
+        }
+    }
+
+
 
     public void handleVentaButton(){
         tabPane.getSelectionModel().select(0);
@@ -310,6 +369,4 @@ public class IndexController {
             JOptionPane.showMessageDialog(null, "Faltan campos por completar", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }
-
-
 }

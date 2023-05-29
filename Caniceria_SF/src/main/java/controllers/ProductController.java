@@ -82,4 +82,23 @@ public class ProductController {
         }
         return productList;
     }
+
+    public ProductModel searchProduct (String codigo){
+        ProductModel producto = new ProductModel();
+        String sql = "SELECT * FROM productos WHERE codigo = ? ";
+        try{
+            conBD = con.getConnection();
+            consulta = conBD.prepareStatement(sql);
+            consulta.setString(1, codigo);
+            rta = consulta.executeQuery();
+            if(rta.next()){
+                producto.setCodigo(rta.getString("codigo"));
+                producto.setNombre(rta.getString("nombre"));
+                producto.setPrecio(rta.getString("precio"));
+            }
+        }catch (SQLException e){
+            System.out.println(e.toString());
+        }
+        return producto;
+    }
 }
