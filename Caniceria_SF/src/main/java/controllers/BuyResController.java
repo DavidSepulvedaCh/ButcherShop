@@ -7,7 +7,6 @@ import models.ConnectionBD;
 import java.sql.*;
 
 import models.BuyResModel;
-import models.ProductModel;
 
 public class BuyResController {
     Connection conBD;
