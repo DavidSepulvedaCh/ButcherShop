@@ -90,7 +90,7 @@
          <children>
             <TabPane fx:id="tabPane" prefHeight="427.0" prefWidth="708.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Venta carne">
+                <Tab fx:id="tbVentaCarne" text="Venta carne">
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
@@ -198,7 +198,7 @@
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
                               </Button>
-                              <TableView fx:id="tableProduct" layoutX="332.0" layoutY="35.0" prefHeight="329.0" prefWidth="323.0">
+                              <TableView fx:id="tableProduct" layoutX="332.0" layoutY="35.0" onMouseClicked="#getValues" prefHeight="329.0" prefWidth="323.0">
                                 <columns>
                                   <TableColumn fx:id="codigoColumn" prefWidth="64.0" text="CODIGO" />
                                     <TableColumn fx:id="precioColumn" prefWidth="98.0" text="PRECIO" />
@@ -209,7 +209,7 @@
                         </AnchorPane>
                      </content>
                 </Tab>
-                  <Tab text="Inventario">
+                  <Tab fx:id="tbInventario" text="Inventario">
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
@@ -228,7 +228,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab text="Compra res">
+                  <Tab fx:id="tbCompraRes" text="Compra res">
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
@@ -285,7 +285,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab text="Compra insumos">
+                  <Tab fx:id="tbCompraInsumos" text="Compra insumos">
                      <content>
                         <AnchorPane prefHeight="397.0" prefWidth="600.0">
                            <children>
@@ -322,7 +322,7 @@
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
                               </Button>
-                              <TableView fx:id="tableBuyInsumo" layoutX="19.0" layoutY="223.0" prefHeight="143.0" prefWidth="675.0">
+                              <TableView fx:id="tableBuyInsumo" layoutX="19.0" layoutY="223.0" onMouseClicked="#getValues" prefHeight="143.0" prefWidth="675.0">
                                  <columns>
                                     <TableColumn fx:id="tipoInsumoColumn" prefWidth="98.0" text="Producto" />
                                     <TableColumn fx:id="precioInsumoColumn" prefWidth="87.0" text="Precio" />

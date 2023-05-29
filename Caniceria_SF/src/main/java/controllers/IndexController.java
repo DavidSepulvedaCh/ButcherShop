@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import models.BuyResModel;
 import models.InsumoModel;
 import models.ProductModel;
@@ -91,8 +92,6 @@ public class IndexController {
     private TextArea txtDescripcionInsumo;
     @FXML
     private TabPane tabPane;
-    @FXML
-    private Tab tbProductos;
 
 
     public IndexController() {
@@ -147,6 +146,42 @@ public class IndexController {
             System.out.println("------------------------");
         }*/
 
+    }
+    @FXML
+    public void getValues(MouseEvent mouseEvent){
+        ProductModel fila = tableProduct.getSelectionModel().getSelectedItem();
+        if (fila != null) {
+            
+            String id = fila.getId();
+            String codigo = fila.getCodigo();
+            String nombre = fila.getNombre();
+            String precio = fila.getPrecio();
+
+            System.out.println("Valor id: " + id);
+            System.out.println("Valor codigo: " + codigo);
+            System.out.println("Valor nombre: " + nombre);
+            System.out.println("Valor precio: " + precio);
+            System.out.printf("==================================\n");
+        } else {
+
+            System.out.println("No se ha seleccionado ninguna fila.");
+        }
+    }
+
+    public void handleVentaButton(){
+        tabPane.getSelectionModel().select(0);
+    }
+    public void handleProductosButton(){
+        tabPane.getSelectionModel().select(1);
+    }
+    public void handleinventarioButton(){
+        tabPane.getSelectionModel().select(2);
+    }
+    public void handleCompraResButton(){
+        tabPane.getSelectionModel().select(3);
+    }
+    public void handleCompraInsumoButton(){
+        tabPane.getSelectionModel().select(4);
     }
 
     public void updateProducts() {
@@ -275,5 +310,6 @@ public class IndexController {
             JOptionPane.showMessageDialog(null, "Faltan campos por completar", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }
+
 
 }
