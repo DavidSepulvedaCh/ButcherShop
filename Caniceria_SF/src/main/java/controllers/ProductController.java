@@ -1,13 +1,13 @@
 package controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.cell.MapValueFactory;
+import javafx.scene.control.cell.PropertyValueFactory;
 import models.ConnectionBD;
 import models.ProductModel;
 
@@ -20,10 +20,10 @@ public class ProductController {
 
     Connection conBD;
     ConnectionBD con = new ConnectionBD();
-
     PreparedStatement consulta;
     ResultSet rta;
     ProductModel pro = new ProductModel();
+    boolean registroExitoso;
 
     public boolean registerProduct(ProductModel prModel) throws SQLException {
         String vld = "SELECT * FROM productos WHERE codigo = ?";
@@ -56,6 +56,7 @@ public class ProductController {
             System.out.println(e.toString());
             return false;
         }
+
     }
 
 
@@ -100,5 +101,30 @@ public class ProductController {
             System.out.println(e.toString());
         }
         return producto;
+    }
+
+    public void verifyRegProducts(String codigo, String producto, String precio) throws SQLException {
+        ProductModel prModel = new ProductModel();
+        prModel.setCodigo(codigo);
+        prModel.setNombre(producto);
+        prModel.setPrecio(precio);
+
+        registroExitoso = registerProduct(prModel);
+        if(registroExitoso){
+
+        }
+    }
+
+    public void updateProducts(TableView<ProductModel> tableProduct) {
+        ObservableList<ProductModel> productList = getAllProducts();
+        tableProduct.setItems(productList);
+    }
+
+    public void showTableProducts(TableView<ProductModel> tableProduct, TableColumn<ProductModel, String> codigoColumn, TableColumn<ProductModel, Double> precioColumn, TableColumn<ProductModel, String> productoColumn){
+        ObservableList<ProductModel> productList = getAllProducts();
+        codigoColumn.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+        precioColumn.setCellValueFactory(new PropertyValueFactory<>("precio"));
+        productoColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        tableProduct.setItems(productList);
     }
 }

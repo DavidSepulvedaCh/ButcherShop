@@ -2,16 +2,22 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import models.ConnectionBD;
 import models.InsumoModel;
 
+import javax.swing.*;
 import java.sql.*;
+import java.time.LocalDate;
 
 public class InsumoController {
     Connection conBD;
     ConnectionBD con = new ConnectionBD();
     PreparedStatement consulta;
     InsumoModel insumoModel = new InsumoModel();
+
+    boolean insumoSuccess;
 
     public boolean registerInsumo (InsumoModel insuMdl){
         String sql = "INSERT INTO insumos (nombre, precio, cantidad, proveedor, fecha, descripcion) VALUES (?, ?, ?, ?, ?, ?)";
@@ -62,4 +68,39 @@ public class InsumoController {
         }
         return insumosList;
     }
+
+    public void verifyInsumo(String precioInsumo, String cantidadInsumo, String proveedorInsumo, LocalDate fechaInsumo, String insumo, String descripcionInsumo){
+        InsumoModel insMdl = new InsumoModel();
+        insMdl.setNombreInsumo(insumo);
+        insMdl.setCantidadInsumo(cantidadInsumo);
+        insMdl.setPrecioInsumo(precioInsumo);
+        insMdl.setProveedorInsumo(proveedorInsumo);
+        insMdl.setFechaInsumo(String.valueOf(fechaInsumo));
+        insMdl.setDescripcionInsumo(descripcionInsumo);
+        insumoSuccess = registerInsumo(insMdl);
+        if(insumoSuccess){
+            JOptionPane.showMessageDialog(null, "Registro de insumo exitoso", "Exito", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Error al registrar la compra", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void updateInsumos(TableView<InsumoModel> tableBuyInsumo){
+        ObservableList<InsumoModel> insumoList = getAllInsumos();
+        tableBuyInsumo.setItems(insumoList);
+    }
+
+    public void showInsumos(TableView<InsumoModel> tableBuyInsumo, TableColumn<InsumoModel, String> tipoInsumoColumn, TableColumn<InsumoModel, String> precioInsumoColumn, TableColumn<InsumoModel, String> cantidadInsumoColumn, TableColumn<InsumoModel, String> proveedorInsumoColumn, TableColumn<InsumoModel, String> fechaInsumoColumn, TableColumn<InsumoModel, String> descripcionInsumoColumn){
+        ObservableList<InsumoModel> insumosList = getAllInsumos();
+
+        tipoInsumoColumn.setCellValueFactory(new PropertyValueFactory<>("nombreInsumo"));
+        precioInsumoColumn.setCellValueFactory(new PropertyValueFactory<>("precioInsumo"));
+        cantidadInsumoColumn.setCellValueFactory(new PropertyValueFactory<>("cantidadInsumo"));
+        proveedorInsumoColumn.setCellValueFactory(new PropertyValueFactory<>("proveedorInsumo"));
+        fechaInsumoColumn.setCellValueFactory(new PropertyValueFactory<>("fechaInsumo"));
+        descripcionInsumoColumn.setCellValueFactory(new PropertyValueFactory<>("descripcionInsumo"));
+
+        tableBuyInsumo.setItems(insumosList);
+    }
+
 }

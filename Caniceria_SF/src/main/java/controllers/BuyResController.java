@@ -2,11 +2,17 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import models.ConnectionBD;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 import models.BuyResModel;
+
+import javax.swing.*;
 
 public class BuyResController {
     Connection conBD;
@@ -14,6 +20,7 @@ public class BuyResController {
     PreparedStatement consulta;
     ResultSet rta;
     BuyResModel buyRes = new BuyResModel();
+    boolean buySuccess;
 
     public boolean registerBuyRes(BuyResModel buyModel) {
         String sql = "INSERT INTO compra_animal (tipo, peso, precio, fecha, proveedor) VALUES (?, ?, ?, ?, ?)";
@@ -63,5 +70,36 @@ public class BuyResController {
             System.out.println(e.toString());
         }
         return purchasesList;
+    }
+
+    public void verifyBuyRes(String pesoArroba, String precioArroba, String proveedor, LocalDate fecha, String tipo){
+        BuyResModel buyMdl = new BuyResModel();
+        buyMdl.setPesoArrobas(pesoArroba);
+        buyMdl.setPrecioArroba(precioArroba);
+        buyMdl.setProveedor(proveedor);
+        buyMdl.setFechaCompra(String.valueOf(fecha));
+        buyMdl.setTipoAnimal(tipo);
+
+        buySuccess = registerBuyRes(buyMdl);
+        if(buySuccess){
+            JOptionPane.showMessageDialog(null, "Registro de compra exitoso", "Exito", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Error al registrar la compra", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    public void updatePurchases(TableView<BuyResModel> tableBuyRes) {
+        ObservableList<BuyResModel> purchasesList = getAllPurchases();
+        tableBuyRes.setItems(purchasesList);
+    }
+
+    public void showBuyRes(TableView<BuyResModel> tableBuyRes, TableColumn<BuyResModel, String> tipoColumn, TableColumn<BuyResModel, String> pesoColumn, TableColumn<BuyResModel, String> precioCompraColumn, TableColumn<BuyResModel, String> fechaColumn, TableColumn<BuyResModel, String> proveedorColumn ){
+        ObservableList<BuyResModel> purchasesList = getAllPurchases();
+        // Celdas tabla COMPRA ANIMAL
+        tipoColumn.setCellValueFactory(new PropertyValueFactory<>("tipoAnimal"));
+        pesoColumn.setCellValueFactory(new PropertyValueFactory<>("pesoArrobas"));
+        precioCompraColumn.setCellValueFactory(new PropertyValueFactory<>("precioArroba"));
+        fechaColumn.setCellValueFactory(new PropertyValueFactory<>("fechaCompra"));
+        proveedorColumn.setCellValueFactory(new PropertyValueFactory<>("proveedor"));
+        tableBuyRes.setItems(purchasesList);
     }
 }

@@ -120,48 +120,18 @@ public class IndexController {
         cbxTipoAnimal.setItems(opcionesTipAnimal);
         ObservableList<String> opcionesInsumos = FXCollections.observableArrayList("Bolsas plasticas", "Bolsas al vacio", "Limpido", "Vinagre", "Carbon");
         cbxTipoInsumo.setItems(opcionesInsumos);
-        ObservableList<ProductModel> productList = productController.getAllProducts();
-        ObservableList<BuyResModel> purchasesList = buyResController.getAllPurchases();
-        ObservableList<InsumoModel> insumosList = insumoController.getAllInsumos();
 
-        // Celdas tablas PRODUCTOS
-        codigoColumn.setCellValueFactory(new PropertyValueFactory<>("codigo"));
-        precioColumn.setCellValueFactory(new PropertyValueFactory<>("precio"));
-        productoColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-
-        // Celdas tabla COMPRA ANIMAL
-        tipoColumn.setCellValueFactory(new PropertyValueFactory<>("tipoAnimal"));
-        pesoColumn.setCellValueFactory(new PropertyValueFactory<>("pesoArrobas"));
-        precioCompraColumn.setCellValueFactory(new PropertyValueFactory<>("precioArroba"));
-        fechaColumn.setCellValueFactory(new PropertyValueFactory<>("fechaCompra"));
-        proveedorColumn.setCellValueFactory(new PropertyValueFactory<>("proveedor"));
-
-        // Celdas tabla INSUMOS
-        tipoInsumoColumn.setCellValueFactory(new PropertyValueFactory<>("nombreInsumo"));
-        precioInsumoColumn.setCellValueFactory(new PropertyValueFactory<>("precioInsumo"));
-        cantidadInsumoColumn.setCellValueFactory(new PropertyValueFactory<>("cantidadInsumo"));
-        proveedorInsumoColumn.setCellValueFactory(new PropertyValueFactory<>("proveedorInsumo"));
-        fechaInsumoColumn.setCellValueFactory(new PropertyValueFactory<>("fechaInsumo"));
-        descripcionInsumoColumn.setCellValueFactory(new PropertyValueFactory<>("descripcionInsumo"));
-
-        // Agrega la lista de productos a la tabla
-        tableProduct.setItems(productList);
-        tableBuyRes.setItems(purchasesList);
-        tableBuyInsumo.setItems(insumosList);
-
+        productController.showTableProducts(tableProduct, codigoColumn, precioColumn, productoColumn);
+        buyResController.showBuyRes(tableBuyRes, tipoColumn, pesoColumn, precioCompraColumn, fechaColumn, proveedorColumn);
+        insumoController.showInsumos(tableBuyInsumo, tipoInsumoColumn, precioInsumoColumn, cantidadInsumoColumn, proveedorInsumoColumn, fechaInsumoColumn, descripcionInsumoColumn);
     }
     @FXML
     public void getValues(MouseEvent mouseEvent){
         ProductModel fila = tableProduct.getSelectionModel().getSelectedItem();
         if (fila != null) {
             idProducto = fila.getId();
-            String codigo = fila.getCodigo();
             nombreProducto = fila.getNombre();
-            String precio = fila.getPrecio();
-
-
         } else {
-
             System.out.println("No se ha seleccionado ninguna fila.");
         }
     }
@@ -169,12 +139,11 @@ public class IndexController {
     public void deleteProduct (){
         if(idProducto != ""){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmar Acción");
+            alert.setTitle("Eliminar producto");
             alert.setHeaderText("¿Estás seguro de que deseas elimnar el producto "+ nombreProducto + " ?");
 
             ButtonType buttonTypeYes = new ButtonType("Eliminar");
             ButtonType buttonTypeNo = new ButtonType("Cancelar");
-
             alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 
             alert.showAndWait().ifPresent(response -> {
@@ -190,7 +159,7 @@ public class IndexController {
                         consulta.setString(1, idProducto);
                         consulta.executeUpdate();
                         JOptionPane.showMessageDialog(null, "El producto se eliminó exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                        updateProducts();
+                        productController.updateProducts(tableProduct);
                     }catch (SQLException e){
                         System.out.println(e.toString());
                     }
@@ -201,12 +170,10 @@ public class IndexController {
         }else{
             JOptionPane.showMessageDialog(null, "No has seleccionado un producto", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
     }
     @FXML
     public void enterCode(KeyEvent event) {
         if (event.getCode().equals(KeyCode.ENTER)) {
-            System.out.println("=====ENTER=====");
             if (!"".equals(txtCodgoProductoVenta.getText())) {
                 String code = txtCodgoProductoVenta.getText();
                 if (productController.searchProduct(code).getNombre() != null) {
@@ -225,8 +192,6 @@ public class IndexController {
         }
     }
 
-
-
     public void handleVentaButton(){
         tabPane.getSelectionModel().select(0);
     }
@@ -243,19 +208,6 @@ public class IndexController {
         tabPane.getSelectionModel().select(4);
     }
 
-    public void updateProducts() {
-        ObservableList<ProductModel> productList = productController.getAllProducts();
-        tableProduct.setItems(productList);
-    }
-    public void updatePurchases() {
-        ObservableList<BuyResModel> purchasesList = buyResController.getAllPurchases();
-        tableBuyRes.setItems(purchasesList);
-    }
-    public void updateInsumos(){
-        ObservableList<InsumoModel> insumoList = insumoController.getAllInsumos();
-        tableBuyInsumo.setItems(insumoList);
-    }
-
     public void setUserName(String userName) {
         lbl_username.setText(userName);
     }
@@ -266,20 +218,14 @@ public class IndexController {
             String nameProduct = txtProductoReg.getText();
             String priceProduct = txtPrecioReg.getText();
 
+            productController.verifyRegProducts(codeProduct,nameProduct, priceProduct);
 
-            ProductModel prModel = new ProductModel();
-            prModel.setCodigo(codeProduct);
-            prModel.setNombre(nameProduct);
-            prModel.setPrecio(priceProduct);
-
-            boolean registroExitoso = productController.registerProduct(prModel);
-
-            if (registroExitoso) {
+            if (productController.registroExitoso) {
                 JOptionPane.showMessageDialog(null, "Registro de producto exitoso", "Exito", JOptionPane.INFORMATION_MESSAGE);
                 txtCodigoProductoReg.setText("");
                 txtProductoReg.setText("");
                 txtPrecioReg.setText("");
-                updateProducts();
+                productController.updateProducts(tableProduct);
 
             } else {
                 JOptionPane.showMessageDialog(null, "Error al registrar el producto", "Error", JOptionPane.ERROR_MESSAGE);
@@ -293,31 +239,22 @@ public class IndexController {
     }
 
     public void vefiryBuyRes() throws SQLException {
-        if (!txtPesoArroba.getText().isEmpty() || !txtPrecioArroba.getText().isEmpty() || !txtProveedor.getText().isEmpty() || cbxTipoAnimal.getValue() != null || lblFechaCompra.getValue() != null) {
+        if (!txtPesoArroba.getText().isEmpty() && !txtPrecioArroba.getText().isEmpty() && !txtProveedor.getText().isEmpty() && cbxTipoAnimal.getValue() != null && lblFechaCompra.getValue() != null) {
             String pesoArroba = txtPesoArroba.getText();
             String precioArroba = txtPrecioArroba.getText();
             String proveedor = txtProveedor.getText();
             LocalDate fecha = lblFechaCompra.getValue();
             String tipo = cbxTipoAnimal.getValue().toString();
 
-            BuyResModel buyMdl = new BuyResModel();
-            buyMdl.setPesoArrobas(pesoArroba);
-            buyMdl.setPrecioArroba(precioArroba);
-            buyMdl.setProveedor(proveedor);
-            buyMdl.setFechaCompra(String.valueOf(fecha));
-            buyMdl.setTipoAnimal(tipo);
-
-            boolean buySuccess = buyResController.registerBuyRes(buyMdl);
-            if(buySuccess){
-                JOptionPane.showMessageDialog(null, "Registro de compra exitoso", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            buyResController.verifyBuyRes(pesoArroba,precioArroba,proveedor,fecha,tipo);
+            if(buyResController.buySuccess){
                 txtProveedor.setText("");
                 txtPrecioArroba.setText("");
                 txtPesoArroba.setText("");
                 lblFechaCompra.setValue(null);
                 cbxTipoAnimal.setValue(0);
-                updatePurchases();
+                buyResController.updatePurchases(tableBuyRes);
             }else{
-                JOptionPane.showMessageDialog(null, "Error al registrar la compra", "Error", JOptionPane.ERROR_MESSAGE);
                 txtProveedor.setText("");
                 txtPrecioArroba.setText("");
                 txtPesoArroba.setText("");
@@ -339,23 +276,15 @@ public class IndexController {
             String descripcionInsumo = txtDescripcionInsumo.getText();
             LocalDate fechaInsumo = lblFechaInsumo.getValue();
 
-            InsumoModel insMdl = new InsumoModel();
-            insMdl.setNombreInsumo(insumo);
-            insMdl.setCantidadInsumo(cantidadInsumo);
-            insMdl.setPrecioInsumo(precioInsumo);
-            insMdl.setProveedorInsumo(proveedorInsumo);
-            insMdl.setFechaInsumo(String.valueOf(fechaInsumo));
-            insMdl.setDescripcionInsumo(descripcionInsumo);
-            boolean insumoSuccess = insumoController.registerInsumo(insMdl);
-            if(insumoSuccess){
-                JOptionPane.showMessageDialog(null, "Registro de insumo exitoso", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            insumoController.verifyInsumo(precioInsumo, cantidadInsumo, proveedorInsumo, fechaInsumo, insumo, descripcionInsumo);
+            if(insumoController.insumoSuccess == true){
                 txtProveedorInsumo.setText("");
                 txtCantidadInsumo.setText("");
                 txtPrecioInsumo.setText("");
                 cbxTipoInsumo.setValue(0);
                 lblFechaInsumo.setValue(null);
                 txtDescripcionInsumo.setText("");
-                updateInsumos();
+                insumoController.updateInsumos(tableBuyInsumo);
             }else{
                 JOptionPane.showMessageDialog(null, "Error al registrar la compra", "Error", JOptionPane.ERROR_MESSAGE);
                 txtProveedorInsumo.setText("");
