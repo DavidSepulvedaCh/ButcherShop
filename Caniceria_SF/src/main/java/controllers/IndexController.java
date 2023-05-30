@@ -7,10 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
-import models.BuyResModel;
-import models.ConnectionBD;
-import models.InsumoModel;
-import models.ProductModel;
+import models.*;
 import controllers.InsumoController;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -25,10 +22,21 @@ import java.awt.event.ActionEvent;
 //import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class IndexController {
     @FXML
     private Label lbl_username;
+    @FXML
+    private TableView tableVenta;
+    @FXML
+    private TableColumn<VentaModel, String> codigoVentaColumn;
+    @FXML
+    private TableColumn<VentaModel, String> productVentaColumn;
+    @FXML
+    private TableColumn<VentaModel, String> cantidadVentaColumn;
+    @FXML
+    private TableColumn<VentaModel, String> precioVentaColumn;
     @FXML
     private TextField txtCantidadProducto;
     @FXML
@@ -42,6 +50,11 @@ public class IndexController {
     private ProductController productController;
     private BuyResController buyResController;
     private InsumoController insumoController;
+    private VentaController ventaController;
+    @FXML
+    private TextField txtClienteVenta;
+    @FXML
+    private Label lblTotal;
     @FXML
     private TableView<ProductModel> tableProduct;
     @FXML
@@ -106,6 +119,10 @@ public class IndexController {
     private TabPane tabPane;
     private String idProducto = "";
     private String nombreProducto;
+    private String precioProducto;
+    private  String codigoProducto;
+    private String cliente;
+    double total = 0.00;
 
 
     public IndexController() {
@@ -113,6 +130,7 @@ public class IndexController {
         productController = new ProductController();
         buyResController = new BuyResController();
         insumoController = new InsumoController();
+        ventaController = new VentaController();
     }
 
     public void initialize() {
@@ -124,6 +142,7 @@ public class IndexController {
         productController.showTableProducts(tableProduct, codigoColumn, precioColumn, productoColumn);
         buyResController.showBuyRes(tableBuyRes, tipoColumn, pesoColumn, precioCompraColumn, fechaColumn, proveedorColumn);
         insumoController.showInsumos(tableBuyInsumo, tipoInsumoColumn, precioInsumoColumn, cantidadInsumoColumn, proveedorInsumoColumn, fechaInsumoColumn, descripcionInsumoColumn);
+        ventaController.showInsumos(tableVenta, codigoVentaColumn, productVentaColumn, cantidadVentaColumn, precioVentaColumn);
     }
     @FXML
     public void getValues(MouseEvent mouseEvent){
@@ -131,6 +150,8 @@ public class IndexController {
         if (fila != null) {
             idProducto = fila.getId();
             nombreProducto = fila.getNombre();
+            precioProducto = fila.getPrecio();
+            codigoProducto = fila.getCodigo();
         } else {
             System.out.println("No se ha seleccionado ninguna fila.");
         }
@@ -192,25 +213,13 @@ public class IndexController {
         }
     }
 
-    public void handleVentaButton(){
-        tabPane.getSelectionModel().select(0);
-    }
-    public void handleProductosButton(){
-        tabPane.getSelectionModel().select(1);
-    }
-    public void handleinventarioButton(){
-        tabPane.getSelectionModel().select(2);
-    }
-    public void handleCompraResButton(){
-        tabPane.getSelectionModel().select(3);
-    }
-    public void handleCompraInsumoButton(){
-        tabPane.getSelectionModel().select(4);
-    }
+    public void handleVentaButton(){ tabPane.getSelectionModel().select(0); }
+    public void handleProductosButton(){ tabPane.getSelectionModel().select(1); }
+    public void handleinventarioButton(){ tabPane.getSelectionModel().select(2); }
+    public void handleCompraResButton(){ tabPane.getSelectionModel().select(3); }
+    public void handleCompraInsumoButton(){ tabPane.getSelectionModel().select(4); }
 
-    public void setUserName(String userName) {
-        lbl_username.setText(userName);
-    }
+    public void setUserName(String userName) { lbl_username.setText(userName); }
 
     public void verificarRegProduct() throws SQLException {
         if (!txtCodigoProductoReg.getText().isEmpty() && !txtProductoReg.getText().isEmpty() && !txtPrecioReg.getText().isEmpty()) {
@@ -294,6 +303,27 @@ public class IndexController {
                 txtDescripcionInsumo.setText("");
                 lblFechaInsumo.setValue(null);
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Faltan campos por completar", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    public void addProduct(){
+        nombreProducto = txtProducto.getText();
+        codigoProducto = txtCodgoProductoVenta.getText();
+        precioProducto = txtPrecioProducto.getText();
+        cliente = txtClienteVenta.getText();
+        int cantidad = Integer.parseInt(txtCantidadProducto.getText());
+
+        if(nombreProducto != "" && codigoProducto != "" && precioProducto != "" && cantidad > 0){
+            ventaController.addTable(codigoProducto,nombreProducto,String.valueOf(cantidad),precioProducto);
+            ventaController.updateVenta(tableVenta);
+            txtProducto.setText("");
+            txtCodgoProductoVenta.setText("");
+            txtCantidadProducto.setText("");
+            txtPrecioProducto.setText("");
+            total = total + (Double.parseDouble(precioProducto)* cantidad);
+            lblTotal.setText(String.valueOf(total));
         }else{
             JOptionPane.showMessageDialog(null, "Faltan campos por completar", "Error", JOptionPane.WARNING_MESSAGE);
         }
