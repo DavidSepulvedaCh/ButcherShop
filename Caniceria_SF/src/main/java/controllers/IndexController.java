@@ -64,6 +64,8 @@ public class IndexController {
     @FXML
     private TableColumn<ProductModel, String> productoColumn;
     @FXML
+    private TableColumn<VentaModel, String> totalProductoVentaColumn;
+    @FXML
     private TextField txtPesoArroba;
     @FXML
     private TextField txtPrecioArroba;
@@ -142,7 +144,7 @@ public class IndexController {
         productController.showTableProducts(tableProduct, codigoColumn, precioColumn, productoColumn);
         buyResController.showBuyRes(tableBuyRes, tipoColumn, pesoColumn, precioCompraColumn, fechaColumn, proveedorColumn);
         insumoController.showInsumos(tableBuyInsumo, tipoInsumoColumn, precioInsumoColumn, cantidadInsumoColumn, proveedorInsumoColumn, fechaInsumoColumn, descripcionInsumoColumn);
-        ventaController.showInsumos(tableVenta, codigoVentaColumn, productVentaColumn, cantidadVentaColumn, precioVentaColumn);
+        ventaController.showInsumos(tableVenta, codigoVentaColumn, productVentaColumn, cantidadVentaColumn, precioVentaColumn, totalProductoVentaColumn);
     }
     @FXML
     public void getValues(MouseEvent mouseEvent){
@@ -316,7 +318,9 @@ public class IndexController {
         int cantidad = Integer.parseInt(txtCantidadProducto.getText());
 
         if(nombreProducto != "" && codigoProducto != "" && precioProducto != "" && cantidad > 0){
-            ventaController.addTable(codigoProducto,nombreProducto,String.valueOf(cantidad),precioProducto);
+            Double total;
+            total = Double.parseDouble(precioProducto + cantidad);
+            ventaController.addTable(codigoProducto,nombreProducto,String.valueOf(cantidad),precioProducto, String.valueOf(1));
             ventaController.updateVenta(tableVenta);
             txtProducto.setText("");
             txtCodgoProductoVenta.setText("");

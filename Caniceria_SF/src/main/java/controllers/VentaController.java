@@ -18,13 +18,14 @@ public class VentaController {
     VentaModel ventaModel = new VentaModel();
     ObservableList<VentaModel> ventaList = FXCollections.observableArrayList();
 
-    public ObservableList<VentaModel> addTable(String codigo, String producto, String cantidad, String precio){
+    public ObservableList<VentaModel> addTable(String codigo, String producto, String cantidad, String precio, String total){
         try {
             VentaModel ventaModel = new VentaModel();
             ventaModel.setCodigoProducto(codigo);
             ventaModel.setProducto(producto);
             ventaModel.setCantidad(cantidad);
             ventaModel.setPrecio(precio);
+            ventaModel.setPrecio(total);
             ventaList.add(ventaModel);
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -37,13 +38,13 @@ public class VentaController {
         tableVenta.setItems(ventaList);
     }
 
-    public void showInsumos(TableView<VentaModel> tableVenta, TableColumn<VentaModel, String> codigoVentaColumn, TableColumn<VentaModel, String> productoVentaColumn, TableColumn<VentaModel, String> cantidadVentaColumn, TableColumn<VentaModel, String> precioVentaColumn){
+    public void showInsumos(TableView<VentaModel> tableVenta, TableColumn<VentaModel, String> codigoVentaColumn, TableColumn<VentaModel, String> productoVentaColumn, TableColumn<VentaModel, String> cantidadVentaColumn, TableColumn<VentaModel, String> precioVentaColumn, TableColumn<VentaModel, String> totalProductoVentaColumn){
 
         codigoVentaColumn.setCellValueFactory(new PropertyValueFactory<>("codigoProducto"));
         productoVentaColumn.setCellValueFactory(new PropertyValueFactory<>("producto"));
         cantidadVentaColumn.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
         precioVentaColumn.setCellValueFactory(new PropertyValueFactory<>("precio"));
-
+        totalProductoVentaColumn.setCellValueFactory(new PropertyValueFactory<>("precio"));
         tableVenta.setItems(ventaList);
     }
 }
