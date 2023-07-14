@@ -1,20 +1,20 @@
 package controllers;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.cell.MapValueFactory;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.ConnectionBD;
 import models.ProductModel;
 
+import  com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import javax.swing.*;
-import java.net.URL;
+import java.io.FileOutputStream;
 import java.sql.*;
-import java.util.*;
 
 public class ProductController {
 
@@ -127,4 +127,95 @@ public class ProductController {
         productoColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         tableProduct.setItems(productList);
     }
+
+    public void printProducts() {
+        try {
+            String ruta = System.getProperty("user.home");
+            String archivoPDF = ruta + "/OneDrive/Escritorio/productos.pdf";
+
+            Document productsList = new Document();
+            PdfWriter.getInstance(productsList, new FileOutputStream(archivoPDF));
+            productsList.open();
+
+            Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+            Font contentFont = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL);
+
+            Paragraph header = new Paragraph();
+            header.setAlignment(Element.ALIGN_CENTER);
+
+            Image logo = Image.getInstance("D:/UPB/VII/Emprendimiento/Logo.png");
+            logo.scaleAbsolute(100f, 100f);
+            header.add(logo);
+
+            Chunk chunk = new Chunk("Chavez Meat\n", headerFont);
+            chunk.append("Dirección: La Carrera N.de.S\n");
+            chunk.append("Teléfono: 3223126566\n");
+            header.add(chunk);
+
+            productsList.add(header);
+
+            PdfPTable tableProducts = new PdfPTable(3);
+            tableProducts.setWidthPercentage(100);
+            tableProducts.setSpacingBefore(20f);
+            tableProducts.setSpacingAfter(20f);
+
+            PdfPCell cell;
+
+            cell = new PdfPCell(new Phrase("Producto", headerFont));
+            cell.setBorderColor(BaseColor.LIGHT_GRAY);
+            cell.setBackgroundColor(BaseColor.GRAY);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setPadding(5f);
+            tableProducts.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Codigo", headerFont));
+            cell.setBorderColor(BaseColor.LIGHT_GRAY);
+            cell.setBackgroundColor(BaseColor.GRAY);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setPadding(5f);
+            tableProducts.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Precio", headerFont));
+            cell.setBorderColor(BaseColor.LIGHT_GRAY);
+            cell.setBackgroundColor(BaseColor.GRAY);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setPadding(5f);
+            tableProducts.addCell(cell);
+
+            try {
+                conBD = con.getConnection();
+                consulta = conBD.prepareStatement("SELECT * FROM productos");
+                ResultSet rta = consulta.executeQuery();
+                while (rta.next()) {
+                    cell = new PdfPCell(new Phrase(rta.getString(3), contentFont));
+                    cell.setBorderColor(BaseColor.LIGHT_GRAY);
+                    cell.setPadding(5f);
+                    tableProducts.addCell(cell);
+
+                    cell = new PdfPCell(new Phrase(rta.getString(2), contentFont));
+                    cell.setBorderColor(BaseColor.LIGHT_GRAY);
+                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cell.setPadding(5f);
+                    tableProducts.addCell(cell);
+
+                    cell = new PdfPCell(new Phrase(rta.getString(4), contentFont));
+                    cell.setBorderColor(BaseColor.LIGHT_GRAY);
+                    cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+                    cell.setPadding(5f);
+                    tableProducts.addCell(cell);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+            productsList.add(tableProducts);
+            productsList.close();
+
+            JOptionPane.showMessageDialog(null, "Documento de productos creado!");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+
 }

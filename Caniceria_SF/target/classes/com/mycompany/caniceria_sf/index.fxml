@@ -125,10 +125,11 @@
                               <TextField fx:id="txtPrecioProducto" layoutX="429.0" layoutY="54.0" prefHeight="25.0" prefWidth="139.0" />
                               <TableView fx:id="tableVenta" layoutX="14.0" layoutY="100.0" prefHeight="215.0" prefWidth="673.0">
                                 <columns>
-                                  <TableColumn fx:id="codigoVentaColumn" prefWidth="112.0" text="CODIGO" />
-                                  <TableColumn fx:id="productVentaColumn" prefWidth="201.0" text="PRODUCTO" />
-                                    <TableColumn fx:id="cantidadVentaColumn" prefWidth="157.0" text="CANTIDAD (Lb)" />
-                                    <TableColumn fx:id="precioVentaColumn" prefWidth="202.0" text="PRECIO" />
+                                  <TableColumn fx:id="codigoVentaColumn" prefWidth="86.0" text="CODIGO" />
+                                  <TableColumn fx:id="productVentaColumn" prefWidth="178.0" text="PRODUCTO" />
+                                    <TableColumn fx:id="cantidadVentaColumn" prefWidth="134.0" text="CANTIDAD (Lb)" />
+                                    <TableColumn fx:id="precioVentaColumn" minWidth="0.0" prefWidth="154.0" text="PRECIO (Lb)" />
+                                    <TableColumn fx:id="totalProductoVentaColumn" minWidth="0.0" prefWidth="115.0" text="TOTAL" />
                                 </columns>
                               </TableView>
                               <Button fx:id="btnImprimirFactura" layoutX="604.0" layoutY="336.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="83.0" style="-fx-background-color: #208AAE; -fx-background-radius: 10;" text="Imprimir" textFill="WHITE">
@@ -141,7 +142,7 @@
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lblTotal" layoutX="29.0" layoutY="356.0" prefHeight="20.0" prefWidth="100.0" text="0.00">
+                              <Label fx:id="lblTotal" layoutX="29.0" layoutY="356.0" prefHeight="21.0" prefWidth="177.0" text="0.00">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
@@ -203,7 +204,7 @@
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnImprimirReg" layoutX="190.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #208AAE; -fx-background-radius: 8;" text="Imprimir" textFill="WHITE">
+                              <Button fx:id="btnImprimirReg" layoutX="190.0" layoutY="240.0" mnemonicParsing="false" onAction="#printProductos" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #208AAE; -fx-background-radius: 8;" text="Imprimir" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
@@ -281,7 +282,7 @@
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnImprimirCompra" layoutX="585.0" layoutY="125.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #208AAE; -fx-background-radius: 8;" text="Imprimir" textFill="WHITE">
+                              <Button fx:id="btnImprimirCompra" layoutX="585.0" layoutY="125.0" mnemonicParsing="false" onAction="#printCompras" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #208AAE; -fx-background-radius: 8;" text="Imprimir" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
@@ -332,7 +333,7 @@
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnImprimirCompra1" layoutX="584.0" layoutY="159.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #208AAE; -fx-background-radius: 8;" text="Imprimir" textFill="WHITE">
+                              <Button fx:id="btnImprimirCompra1" layoutX="584.0" layoutY="159.0" mnemonicParsing="false" onAction="#printInsimos" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #208AAE; -fx-background-radius: 8;" text="Imprimir" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>

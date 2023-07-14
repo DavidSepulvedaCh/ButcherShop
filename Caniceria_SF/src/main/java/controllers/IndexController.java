@@ -4,25 +4,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
-import models.*;
-import controllers.InsumoController;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import models.*;
 
+import controllers.ProductController;
+import controllers.BuyResPrint;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-//import java.awt.event.KeyEvent;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class IndexController {
     @FXML
@@ -48,6 +43,8 @@ public class IndexController {
     @FXML
     private TextField txtPrecioReg;
     private ProductController productController;
+    private BuyResPrint buyResPrint;
+    private InsumosPrint insumosPrint;
     private BuyResController buyResController;
     private InsumoController insumoController;
     private VentaController ventaController;
@@ -124,8 +121,7 @@ public class IndexController {
     private String precioProducto;
     private  String codigoProducto;
     private String cliente;
-    double total = 0.00;
-
+    double totalVenta = 0.00;
 
     public IndexController() {
 
@@ -133,6 +129,8 @@ public class IndexController {
         buyResController = new BuyResController();
         insumoController = new InsumoController();
         ventaController = new VentaController();
+        buyResPrint = new BuyResPrint();
+        insumosPrint = new InsumosPrint();
     }
 
     public void initialize() {
@@ -310,26 +308,34 @@ public class IndexController {
         }
     }
 
-    public void addProduct(){
+    public void addProduct() {
         nombreProducto = txtProducto.getText();
         codigoProducto = txtCodgoProductoVenta.getText();
         precioProducto = txtPrecioProducto.getText();
         cliente = txtClienteVenta.getText();
         int cantidad = Integer.parseInt(txtCantidadProducto.getText());
 
-        if(nombreProducto != "" && codigoProducto != "" && precioProducto != "" && cantidad > 0){
-            Double total;
-            total = Double.parseDouble(precioProducto + cantidad);
-            ventaController.addTable(codigoProducto,nombreProducto,String.valueOf(cantidad),precioProducto, String.valueOf(1));
+        if (!nombreProducto.isEmpty() && !codigoProducto.isEmpty() && !precioProducto.isEmpty() && cantidad > 0) {
+            double precio = Double.parseDouble(precioProducto);
+            double totalProducto = precio * cantidad;
+
+
+            ventaController.addTable(codigoProducto, nombreProducto, String.valueOf(cantidad), precioProducto, String.valueOf(totalProducto));
             ventaController.updateVenta(tableVenta);
+            totalVenta += totalProducto;
             txtProducto.setText("");
             txtCodgoProductoVenta.setText("");
             txtCantidadProducto.setText("");
             txtPrecioProducto.setText("");
-            total = total + (Double.parseDouble(precioProducto)* cantidad);
-            lblTotal.setText(String.valueOf(total));
-        }else{
+
+            lblTotal.setText(String.valueOf(totalVenta));
+        } else {
             JOptionPane.showMessageDialog(null, "Faltan campos por completar", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }
+
+    public void printProductos(){ productController.printProducts();}
+    public void printCompras(){buyResPrint.printProducts();}
+    public void printInsimos(){insumosPrint.printProducts();}
+
 }

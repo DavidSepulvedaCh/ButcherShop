@@ -25,7 +25,7 @@ public class VentaController {
             ventaModel.setProducto(producto);
             ventaModel.setCantidad(cantidad);
             ventaModel.setPrecio(precio);
-            ventaModel.setPrecio(total);
+            ventaModel.setTotal(total);
             ventaList.add(ventaModel);
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -44,7 +44,7 @@ public class VentaController {
         productoVentaColumn.setCellValueFactory(new PropertyValueFactory<>("producto"));
         cantidadVentaColumn.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
         precioVentaColumn.setCellValueFactory(new PropertyValueFactory<>("precio"));
-        totalProductoVentaColumn.setCellValueFactory(new PropertyValueFactory<>("precio"));
+        totalProductoVentaColumn.setCellValueFactory(new PropertyValueFactory<>("total"));
         tableVenta.setItems(ventaList);
     }
 }
