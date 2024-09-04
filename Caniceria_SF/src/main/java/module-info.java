@@ -5,6 +5,7 @@ module com.mycompany.caniceria_sf {
     requires java.desktop;
     requires java.sql;
     requires itext5.itextpdf;
+    requires javafx.graphics;
 
     opens com.mycompany.caniceria_sf to javafx.fxml;
     opens controllers to javafx.fxml;

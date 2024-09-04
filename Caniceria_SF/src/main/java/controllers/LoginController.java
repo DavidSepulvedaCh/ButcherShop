@@ -43,7 +43,7 @@ public class LoginController implements Initializable {
 
     public LoginModel login(String user, String clv){
         LoginModel lg = new LoginModel();
-        String sql = "SELECT * FROM usuarios WHERE nombre = ? AND clave = ?";
+        String sql = "SELECT * FROM Usuarios WHERE userName = ? AND clave = ?";
         try{
             conBD = cx.getConnection();
             consulta = conBD.prepareStatement(sql);

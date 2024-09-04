@@ -23,7 +23,7 @@ public class BuyResController {
     boolean buySuccess;
 
     public boolean registerBuyRes(BuyResModel buyModel) {
-        String sql = "INSERT INTO compra_animal (tipo, peso, precio, fecha, proveedor) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO BuyRes (tipoAnimal, pesoArrobas, precioArroba, fechaCompra, proveedor) VALUES (?, ?, ?, ?, ?)";
         try {
             conBD = con.getConnection();
             consulta = conBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -48,7 +48,7 @@ public class BuyResController {
     }
 
     public ObservableList<BuyResModel> getAllPurchases() {
-        String sql = "SELECT * FROM compra_animal";
+        String sql = "SELECT * FROM BuyRes";
         ObservableList<BuyResModel> purchasesList = FXCollections.observableArrayList();
         try {
             ConnectionBD conBD = new ConnectionBD();
@@ -57,11 +57,11 @@ public class BuyResController {
             while (rta.next()) {
                 BuyResModel buyRes = new BuyResModel();
                 buyRes.setId(rta.getString("id"));
-                buyRes.setTipoAnimal(rta.getString("tipo"));
+                buyRes.setTipoAnimal(rta.getString("tipoAnimal"));
                 buyRes.setProveedor(rta.getString("proveedor"));
-                buyRes.setPesoArrobas(rta.getString("peso"));
-                buyRes.setPrecioArroba(rta.getString("precio"));
-                buyRes.setFechaCompra(rta.getString("fecha"));
+                buyRes.setPesoArrobas(rta.getString("pesoArrobas"));
+                buyRes.setPrecioArroba(rta.getString("precioArroba"));
+                buyRes.setFechaCompra(rta.getString("fechaCompra"));
                 purchasesList.add(buyRes);
             }
             rta.close();

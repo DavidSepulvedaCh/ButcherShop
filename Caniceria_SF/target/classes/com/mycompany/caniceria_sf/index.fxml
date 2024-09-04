@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -16,70 +17,60 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="550.0" prefWidth="948.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.IndexController">
+<AnchorPane prefHeight="550.0" prefWidth="948.0" stylesheets="@assets/styles/index.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.IndexController">
    <children>
-      <Pane prefHeight="550.0" prefWidth="241.0" style="-fx-background-color: #A50104; -fx-border-color: white;">
+      <Pane prefHeight="550.0" prefWidth="241.0" styleClass="anchor-pane">
          <children>
-            <Button layoutX="144.0" layoutY="510.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" style="-fx-background-color: #020202;" text="Salir" textFill="WHITE">
+            <Button layoutX="138.0" layoutY="514.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="94.0" styleClass="button-logout" text="Salir" textFill="WHITE">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Button>
-            <Label layoutX="38.0" layoutY="116.0" text="Menú de opciones" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="17.0" />
-               </font>
-            </Label>
-            <Button fx:id="btnVenta" layoutX="32.0" layoutY="161.0" mnemonicParsing="false" onAction="#handleVentaButton" prefHeight="40.0" prefWidth="177.0" style="-fx-background-color: White; -fx-background-radius: 10;" text="Venta de carne">
+            <Button fx:id="btnVenta" layoutX="32.0" layoutY="161.0" mnemonicParsing="false" onAction="#handleVentaButton" prefHeight="40.0" prefWidth="177.0" styleClass="button-menu" text="Venta de carne">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="btnInvetario" layoutX="32.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleinventarioButton" prefHeight="40.0" prefWidth="177.0" style="-fx-background-color: White; -fx-background-radius: 10;" text="Inventario">
+            <Button fx:id="btnInvetario" layoutX="32.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleinventarioButton" prefHeight="40.0" prefWidth="177.0" styleClass="button-menu" text="Inventario">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="32.0" layoutY="275.0" mnemonicParsing="false" onAction="#handleCompraResButton" prefHeight="40.0" prefWidth="177.0" style="-fx-background-color: White; -fx-background-radius: 10;" text="Comprar Res">
+            <Button layoutX="32.0" layoutY="275.0" mnemonicParsing="false" onAction="#handleCompraResButton" prefHeight="40.0" prefWidth="177.0" styleClass="button-menu" text="Comprar Res">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="32.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleCompraInsumoButton" prefHeight="40.0" prefWidth="177.0" style="-fx-background-color: White; -fx-background-radius: 10;" text="Compra insumos">
+            <Button layoutX="32.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleCompraInsumoButton" prefHeight="40.0" prefWidth="177.0" styleClass="button-menu" text="Compra insumos">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="32.0" layoutY="388.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="177.0" style="-fx-background-color: White; -fx-background-radius: 10;" text="Finanzas">
+            <Button layoutX="32.0" layoutY="388.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="177.0" styleClass="button-menu" text="Finanzas">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="btnProductos" layoutX="32.0" layoutY="446.0" mnemonicParsing="false" onAction="#handleProductosButton" prefHeight="40.0" prefWidth="177.0" style="-fx-background-color: White; -fx-background-radius: 10;" text="Productos">
+            <Button fx:id="btnProductos" layoutX="32.0" layoutY="446.0" mnemonicParsing="false" onAction="#handleProductosButton" prefHeight="40.0" prefWidth="177.0" styleClass="button-menu" text="Productos">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <ImageView fitHeight="109.0" fitWidth="108.0" layoutX="58.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="148.0" fitWidth="166.0" layoutX="38.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../../UPB/VII/Emprendimiento/lOGO.png" />
+                  <Image url="@assets/Logos/Logo_Png.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Pane layoutX="241.0" prefHeight="123.0" prefWidth="708.0" style="-fx-background-color: #A50104; -fx-border-color: White;">
+      <Pane layoutX="241.0" prefHeight="123.0" prefWidth="708.0" styleClass="anchor-pane" stylesheets="@assets/styles/index.css">
          <children>
-            <Label layoutX="182.0" layoutY="26.0" text="CARNICERIA LA CARRERA" textFill="#eaf0ce">
+            <Label layoutX="134.0" layoutY="29.0" styleClass="label-title" text="CARNICERIA LA CARRERA" textFill="#eaf0ce">
                <font>
                   <Font name="Arial Bold" size="24.0" />
                </font>
             </Label>
-            <Label id="lbl_username" fx:id="lbl_username" layoutX="525.0" layoutY="79.0" prefHeight="21.0" prefWidth="161.0" text="UserName" textFill="#eaf0ce">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="462.0" layoutY="78.0" prefHeight="21.0" prefWidth="48.0" text="Hola," textFill="#eaf0ce">
+            <Label id="lbl_username" fx:id="lbl_username" layoutX="587.0" layoutY="88.0" prefHeight="21.0" prefWidth="107.0" styleClass="label-user" text="UserName" textFill="#eaf0ce">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -94,79 +85,95 @@
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="14.0" layoutY="14.0" text="Codigo">
+                              <Label layoutX="16.0" layoutY="19.0" styleClass="label-form" text="Codigo*">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="123.0" layoutY="14.0" prefHeight="20.0" prefWidth="83.0" text="Producto">
+                              <Label layoutX="125.0" layoutY="18.0" prefHeight="20.0" prefWidth="83.0" styleClass="label-form" text="Producto">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="280.0" layoutY="14.0" prefHeight="20.0" prefWidth="97.0" text="Cantidad (Lb)">
+                              <Label layoutX="282.0" layoutY="19.0" prefHeight="20.0" prefWidth="97.0" styleClass="label-form" text="Cantidad (Lb)*">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="429.0" layoutY="14.0" prefHeight="20.0" prefWidth="62.0" text="Precio">
+                              <Label layoutX="431.0" layoutY="19.0" prefHeight="20.0" prefWidth="62.0" styleClass="label-form" text="Precio">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="btnAgregarProducto" layoutX="604.0" layoutY="7.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="34.0" prefWidth="83.0" style="-fx-background-color: #04F06A; -fx-background-radius: 10;" text="Agregar" textFill="WHITE">
+                              <Button fx:id="btnAgregarProducto" layoutX="593.0" layoutY="5.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="38.0" prefWidth="94.0" text="Agregar" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="14.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="buttonn" />
+                                    <String fx:value="button-add" />
+                                 </styleClass>
                               </Button>
-                              <TextField fx:id="txtCodgoProductoVenta" layoutX="14.0" layoutY="54.0" onKeyPressed="#enterCode" prefHeight="25.0" prefWidth="83.0" />
-                              <TextField fx:id="txtProducto" layoutX="123.0" layoutY="54.0" prefHeight="25.0" prefWidth="137.0" />
-                              <TextField fx:id="txtCantidadProducto" layoutX="280.0" layoutY="54.0" prefHeight="25.0" prefWidth="123.0" />
-                              <TextField fx:id="txtPrecioProducto" layoutX="429.0" layoutY="54.0" prefHeight="25.0" prefWidth="139.0" />
+                              <TextField fx:id="txtCodgoProductoVenta" layoutX="16.0" layoutY="42.0" onKeyPressed="#enterCode" prefHeight="25.0" prefWidth="83.0" />
+                              <TextField fx:id="txtProducto" layoutX="125.0" layoutY="42.0" prefHeight="25.0" prefWidth="137.0" />
+                              <TextField fx:id="txtCantidadProducto" layoutX="282.0" layoutY="42.0" prefHeight="25.0" prefWidth="123.0" />
+                              <TextField fx:id="txtPrecioProducto" layoutX="431.0" layoutY="42.0" prefHeight="25.0" prefWidth="139.0" />
                               <TableView fx:id="tableVenta" layoutX="14.0" layoutY="100.0" prefHeight="215.0" prefWidth="673.0">
                                 <columns>
-                                  <TableColumn fx:id="codigoVentaColumn" prefWidth="86.0" text="CODIGO" />
-                                  <TableColumn fx:id="productVentaColumn" prefWidth="178.0" text="PRODUCTO" />
+                                  <TableColumn fx:id="codigoVentaColumn" prefWidth="88.0" text="CODIGO" />
+                                  <TableColumn fx:id="productVentaColumn" prefWidth="176.0" text="PRODUCTO" />
                                     <TableColumn fx:id="cantidadVentaColumn" prefWidth="134.0" text="CANTIDAD (Lb)" />
                                     <TableColumn fx:id="precioVentaColumn" minWidth="0.0" prefWidth="154.0" text="PRECIO (Lb)" />
-                                    <TableColumn fx:id="totalProductoVentaColumn" minWidth="0.0" prefWidth="115.0" text="TOTAL" />
+                                    <TableColumn fx:id="totalProductoVentaColumn" minWidth="0.0" prefWidth="120.0" text="TOTAL" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="btnImprimirFactura" layoutX="604.0" layoutY="336.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="83.0" style="-fx-background-color: #208AAE; -fx-background-radius: 10;" text="Imprimir" textFill="WHITE">
+                              <Button fx:id="btnImprimirFactura" layoutX="588.0" layoutY="336.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="99.0" text="Imprimir" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="14.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="buttonn" />
+                                    <String fx:value="button-print" />
+                                 </styleClass>
                               </Button>
-                              <Label layoutX="14.0" layoutY="328.0" text="Total a pagar">
+                              <Label layoutX="14.0" layoutY="324.0" styleClass="label-form" text="Total a pagar">
                                  <font>
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lblTotal" layoutX="29.0" layoutY="356.0" prefHeight="21.0" prefWidth="177.0" text="0.00">
+                              <Label fx:id="lblTotal" layoutX="37.0" layoutY="345.0" prefHeight="21.0" prefWidth="177.0" styleClass="label-total" text="0.00">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="260.0" layoutY="330.0" text="Cliente">
+                              <Label layoutX="223.0" layoutY="324.0" styleClass="label-form" text="Cliente">
                                  <font>
                                     <Font name="Arial Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="txtClienteVenta" layoutX="260.0" layoutY="354.0" prefHeight="25.0" prefWidth="218.0" />
-                              <Button fx:id="btnAgregarProducto1" layoutX="604.0" layoutY="50.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="83.0" style="-fx-background-color: #A50104; -fx-background-radius: 10;" text="Eliminar" textFill="WHITE">
+                              <TextField fx:id="txtClienteVenta" layoutX="223.0" layoutY="346.0" prefHeight="25.0" prefWidth="218.0" />
+                              <Button fx:id="btnAgregarProducto1" layoutX="592.0" layoutY="50.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="95.0" text="Eliminar" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="14.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="buttonn" />
+                                    <String fx:value="button-delete" />
+                                 </styleClass>
                               </Button>
-                              <Label fx:id="lblTotal1" layoutX="14.0" layoutY="356.0" prefHeight="21.0" prefWidth="15.0" text="\$">
+                              <Label fx:id="lblTotal1" layoutX="16.0" layoutY="344.0" prefHeight="21.0" prefWidth="15.0" styleClass="label-total" text="\$">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="btnVender" layoutX="506.0" layoutY="336.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="83.0" style="-fx-background-color: #04F06A; -fx-background-radius: 10;" text="Vender" textFill="WHITE">
+                              <Button fx:id="btnVender" layoutX="486.0" layoutY="336.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="93.0" text="Vender" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="14.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="buttonn" />
+                                    <String fx:value="button-sell" />
+                                 </styleClass>
                               </Button>
                            </children>
                         </AnchorPane>
@@ -176,49 +183,65 @@
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="26.0" layoutY="43.0" text="Codigo">
+                              <Label layoutX="26.0" layoutY="45.0" styleClass="label-form" text="Codigo">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="26.0" layoutY="87.0" text="Nombre">
+                              <Label layoutX="26.0" layoutY="89.0" styleClass="label-form" text="Nombre">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="26.0" layoutY="134.0" text="Precio (Lb)">
+                              <Label layoutX="26.0" layoutY="137.0" styleClass="label-form" text="Precio (Lb)">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="txtCodigoProductoReg" layoutX="113.0" layoutY="41.0" prefHeight="25.0" prefWidth="177.0" />
-                              <TextField fx:id="txtProductoReg" layoutX="113.0" layoutY="85.0" prefHeight="25.0" prefWidth="177.0" />
-                              <TextField fx:id="txtPrecioReg" layoutX="113.0" layoutY="132.0" prefHeight="25.0" prefWidth="177.0" />
-                              <Button fx:id="btnAgregarReg" layoutX="29.0" layoutY="187.0" mnemonicParsing="false" onAction="#verificarRegProduct" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #04F06A; -fx-background-radius: 8;" text="Agregar" textFill="WHITE">
+                              <TextField fx:id="txtCodigoProductoReg" layoutX="108.0" layoutY="41.0" prefHeight="25.0" prefWidth="177.0" />
+                              <TextField fx:id="txtProductoReg" layoutX="108.0" layoutY="85.0" prefHeight="25.0" prefWidth="177.0" />
+                              <TextField fx:id="txtPrecioReg" layoutX="108.0" layoutY="132.0" prefHeight="25.0" prefWidth="177.0" />
+                              <Button fx:id="btnAgregarReg" layoutX="29.0" layoutY="187.0" mnemonicParsing="false" onAction="#verificarRegProduct" prefHeight="40.0" prefWidth="108.0" text="Agregar" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="buttonn" />
+                                    <String fx:value="button-add" />
+                                 </styleClass>
                               </Button>
-                              <Button fx:id="btnEliminarReg" layoutX="190.0" layoutY="187.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #A50104; -fx-background-radius: 8;" text="Eliminar" textFill="WHITE">
+                              <Button fx:id="btnEliminarReg" layoutX="185.0" layoutY="187.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="40.0" prefWidth="100.0" text="Eliminar" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="buttonn" />
+                                    <String fx:value="button-delete" />
+                                 </styleClass>
                               </Button>
-                              <Button fx:id="btnImprimirReg" layoutX="190.0" layoutY="240.0" mnemonicParsing="false" onAction="#printProductos" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #208AAE; -fx-background-radius: 8;" text="Imprimir" textFill="WHITE">
+                              <Button fx:id="btnImprimirReg" layoutX="185.0" layoutY="240.0" mnemonicParsing="false" onAction="#printProductos" prefHeight="40.0" prefWidth="100.0" text="Imprimir" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="buttonn" />
+                                    <String fx:value="button-print" />
+                                 </styleClass>
                               </Button>
-                              <Button fx:id="btnExcel" layoutX="29.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #04F06A; -fx-background-radius: 8;" text="Hoja Excel" textFill="WHITE">
+                              <Button fx:id="btnExcel" layoutX="29.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="108.0" text="Hoja Excel" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="buttonn" />
+                                    <String fx:value="button-excel" />
+                                 </styleClass>
                               </Button>
-                              <TableView fx:id="tableProduct" layoutX="332.0" layoutY="35.0" onMouseClicked="#getValues" prefHeight="329.0" prefWidth="323.0">
+                              <TableView fx:id="tableProduct" layoutX="332.0" layoutY="35.0" onMouseClicked="#getValues" prefHeight="329.0" prefWidth="338.0">
                                 <columns>
-                                  <TableColumn fx:id="codigoColumn" prefWidth="64.0" text="CODIGO" />
-                                    <TableColumn fx:id="precioColumn" prefWidth="98.0" text="PRECIO" />
-                                  <TableColumn fx:id="productoColumn" prefWidth="160.0" text="PRODUCTO" />
+                                  <TableColumn fx:id="codigoColumn" prefWidth="81.0" text="CODIGO" />
+                                    <TableColumn fx:id="precioColumn" prefWidth="118.0" text="PRECIO" />
+                                  <TableColumn fx:id="productoColumn" prefWidth="138.0" text="PRODUCTO" />
                                 </columns>
                               </TableView>
                            </children>
@@ -239,7 +262,11 @@
                                     <TableColumn prefWidth="119.0" text="Total" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="btnInventarioPDF" layoutX="21.0" layoutY="23.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="69.0" style="-fx-background-color: #A50104; -fx-background-radius: 10;" text="PDF" textFill="WHITE" />
+                              <Button fx:id="btnInventarioPDF" layoutX="21.0" layoutY="23.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="129.0" text="Generar PDF" textFill="WHITE">
+                                 <styleClass>
+                                    <String fx:value="buttonn" />
+                                    <String fx:value="button-pdf" />
+                                 </styleClass></Button>
                            </children>
                         </AnchorPane>
                      </content>
@@ -248,55 +275,63 @@
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="14.0" layoutY="35.0" prefHeight="20.0" prefWidth="114.0" text="Tipo de animal">
+                              <Label layoutX="25.0" layoutY="35.0" prefHeight="23.0" prefWidth="100.0" styleClass="label-form" text="Tipo de animal">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="14.0" layoutY="79.0" prefHeight="20.0" prefWidth="114.0" text="Peso (arrobas)">
+                              <Label layoutX="25.0" layoutY="79.0" prefHeight="23.0" prefWidth="107.0" styleClass="label-form" text="Peso (arrobas)">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="346.0" layoutY="79.0" prefHeight="20.0" prefWidth="114.0" text="Precio arroba">
+                              <Label layoutX="346.0" layoutY="79.0" prefHeight="20.0" prefWidth="114.0" styleClass="label-form" text="Precio arroba">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="txtPesoArroba" layoutX="144.0" layoutY="77.0" />
-                              <TextField fx:id="txtPrecioArroba" layoutX="476.0" layoutY="77.0" prefHeight="25.0" prefWidth="191.0" />
-                              <Label layoutX="14.0" layoutY="122.0" prefHeight="20.0" prefWidth="114.0" text="Fecha">
+                              <TextField fx:id="txtPesoArroba" layoutX="141.0" layoutY="77.0" />
+                              <TextField fx:id="txtPrecioArroba" layoutX="473.0" layoutY="73.0" prefHeight="25.0" prefWidth="191.0" />
+                              <Label layoutX="25.0" layoutY="122.0" prefHeight="23.0" prefWidth="107.0" styleClass="label-form" text="Fecha">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <DatePicker fx:id="lblFechaCompra" layoutX="144.0" layoutY="120.0" prefHeight="25.0" prefWidth="148.0" />
-                              <Label layoutX="346.0" layoutY="36.0" prefHeight="20.0" prefWidth="114.0" text="Proveedor">
+                              <DatePicker fx:id="lblFechaCompra" layoutX="141.0" layoutY="120.0" prefHeight="30.0" prefWidth="177.0" />
+                              <Label layoutX="346.0" layoutY="36.0" prefHeight="20.0" prefWidth="114.0" styleClass="label-form" text="Proveedor">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="txtProveedor" layoutX="476.0" layoutY="34.0" prefHeight="25.0" prefWidth="190.0" />
-                              <Button fx:id="btnAgregarCompra" layoutX="468.0" layoutY="125.0" mnemonicParsing="false" onAction="#vefiryBuyRes" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #04F06A; -fx-background-radius: 8;" text="Agregar" textFill="WHITE">
+                              <TextField fx:id="txtProveedor" layoutX="473.0" layoutY="30.0" prefHeight="25.0" prefWidth="190.0" />
+                              <Button fx:id="btnAgregarCompra" layoutX="457.0" layoutY="125.0" mnemonicParsing="false" onAction="#vefiryBuyRes" prefHeight="40.0" prefWidth="90.0" text="Agregar" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="buttonn" />
+                                    <String fx:value="button-add" />
+                                 </styleClass>
                               </Button>
-                              <Button fx:id="btnImprimirCompra" layoutX="585.0" layoutY="125.0" mnemonicParsing="false" onAction="#printCompras" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #208AAE; -fx-background-radius: 8;" text="Imprimir" textFill="WHITE">
+                              <Button fx:id="btnImprimirCompra" layoutX="565.0" layoutY="125.0" mnemonicParsing="false" onAction="#printCompras" prefHeight="40.0" prefWidth="99.0" text="Imprimir" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="buttonn" />
+                                    <String fx:value="button-print" />
+                                 </styleClass>
                               </Button>
                               <TableView fx:id="tableBuyRes" layoutX="19.0" layoutY="191.0" prefHeight="175.0" prefWidth="661.0">
                                 <columns>
-                                  <TableColumn fx:id="tipoColumn" prefWidth="55.0" text="Tipo" />
-                                  <TableColumn fx:id="pesoColumn" prefWidth="104.0" text="Peso (@)" />
-                                    <TableColumn fx:id="precioCompraColumn" prefWidth="141.0" text="Precio (@)" />
-                                    <TableColumn fx:id="proveedorColumn" prefWidth="199.0" text="Proveedor" />
-                                    <TableColumn fx:id="fechaColumn" prefWidth="161.0" text="Fecha" />
+                                  <TableColumn fx:id="tipoColumn" prefWidth="71.0" text="Tipo" />
+                                  <TableColumn fx:id="pesoColumn" prefWidth="93.0" text="Peso (@)" />
+                                    <TableColumn fx:id="precioCompraColumn" prefWidth="146.0" text="Precio (@)" />
+                                    <TableColumn fx:id="proveedorColumn" prefWidth="204.0" text="Proveedor" />
+                                    <TableColumn fx:id="fechaColumn" prefWidth="146.0" text="Fecha" />
                                 </columns>
                               </TableView>
-                              <ComboBox fx:id="cbxTipoAnimal" layoutX="143.0" layoutY="34.0" prefWidth="150.0" />
+                              <ComboBox fx:id="cbxTipoAnimal" layoutX="142.0" layoutY="28.0" prefHeight="26.0" prefWidth="177.0" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -305,38 +340,46 @@
                      <content>
                         <AnchorPane prefHeight="397.0" prefWidth="600.0">
                            <children>
-                              <Label layoutX="14.0" layoutY="35.0" prefHeight="20.0" prefWidth="114.0" text="Producto">
+                              <Label layoutX="23.0" layoutY="35.0" prefHeight="20.0" prefWidth="114.0" styleClass="label-form" text="Producto">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="14.0" layoutY="79.0" prefHeight="20.0" prefWidth="114.0" text="Precio">
+                              <Label layoutX="23.0" layoutY="79.0" prefHeight="20.0" prefWidth="114.0" styleClass="label-form" text="Precio">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="txtPrecioInsumo" layoutX="144.0" layoutY="78.0" />
-                              <Label layoutX="14.0" layoutY="159.0" prefHeight="20.0" prefWidth="114.0" text="Fecha">
+                              <TextField fx:id="txtPrecioInsumo" layoutX="118.0" layoutY="78.0" />
+                              <Label layoutX="23.0" layoutY="159.0" prefHeight="20.0" prefWidth="114.0" styleClass="label-form" text="Fecha">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <DatePicker fx:id="lblFechaInsumo" layoutX="144.0" layoutY="157.0" prefHeight="25.0" prefWidth="148.0" />
-                              <Label layoutX="346.0" layoutY="36.0" prefHeight="20.0" prefWidth="83.0" text="Proveedor">
+                              <DatePicker fx:id="lblFechaInsumo" layoutX="118.0" layoutY="157.0" prefHeight="30.0" prefWidth="177.0" />
+                              <Label layoutX="344.0" layoutY="36.0" prefHeight="20.0" prefWidth="83.0" styleClass="label-form" text="Proveedor">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="txtProveedorInsumo" layoutX="447.0" layoutY="34.0" prefHeight="25.0" prefWidth="227.0" />
-                              <Button fx:id="btnAgregarInsumo" layoutX="444.0" layoutY="162.0" mnemonicParsing="false" onAction="#verifyInsumo" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #04F06A; -fx-background-radius: 8;" text="Agregar" textFill="WHITE">
+                              <Button fx:id="btnAgregarInsumo" layoutX="453.0" layoutY="159.0" mnemonicParsing="false" onAction="#verifyInsumo" prefHeight="40.0" prefWidth="97.0" text="Agregar" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="buttonn" />
+                                    <String fx:value="button-add" />
+                                 </styleClass>
                               </Button>
-                              <Button fx:id="btnImprimirCompra1" layoutX="584.0" layoutY="159.0" mnemonicParsing="false" onAction="#printInsimos" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #208AAE; -fx-background-radius: 8;" text="Imprimir" textFill="WHITE">
+                              <Button fx:id="btnImprimirCompra1" layoutX="575.0" layoutY="159.0" mnemonicParsing="false" onAction="#printInsimos" prefHeight="40.0" prefWidth="99.0" text="Imprimir" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="buttonn" />
+                                    <String fx:value="button-print" />
+                                 </styleClass>
                               </Button>
                               <TableView fx:id="tableBuyInsumo" layoutX="19.0" layoutY="223.0" onMouseClicked="#getValues" prefHeight="143.0" prefWidth="675.0">
                                  <columns>
@@ -348,14 +391,14 @@
                                     <TableColumn fx:id="descripcionInsumoColumn" prefWidth="196.0" text="Descripción" />
                                  </columns>
                               </TableView>
-                              <ComboBox fx:id="cbxTipoInsumo" layoutX="143.0" layoutY="34.0" prefWidth="150.0" />
-                              <Label layoutX="14.0" layoutY="119.0" prefHeight="20.0" prefWidth="114.0" text="Cantidad">
+                              <ComboBox fx:id="cbxTipoInsumo" layoutX="117.0" layoutY="34.0" prefHeight="32.0" prefWidth="177.0" />
+                              <Label layoutX="23.0" layoutY="119.0" prefHeight="20.0" prefWidth="114.0" styleClass="label-form" text="Cantidad">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="txtCantidadInsumo" layoutX="144.0" layoutY="117.0" />
-                              <Label layoutX="346.0" layoutY="79.0" prefHeight="53.0" prefWidth="93.0" text="Descripción (opcional)" textOverrun="CLIP" wrapText="true">
+                              <TextField fx:id="txtCantidadInsumo" layoutX="118.0" layoutY="117.0" />
+                              <Label layoutX="344.0" layoutY="79.0" prefHeight="53.0" prefWidth="93.0" styleClass="label-form" text="Descripción (opcional)" textOverrun="CLIP" wrapText="true">
                                  <font>
                                     <Font name="Arial" size="16.0" />
                                  </font>

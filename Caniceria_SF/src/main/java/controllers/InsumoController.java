@@ -20,7 +20,7 @@ public class InsumoController {
     boolean insumoSuccess;
 
     public boolean registerInsumo (InsumoModel insuMdl){
-        String sql = "INSERT INTO insumos (nombre, precio, cantidad, proveedor, fecha, descripcion) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Insumo (nombreInsumo, precioInsumo, cantidadInsumo, proveedorInsumo, fechaInsumo, descripcionInsumo) VALUES (?, ?, ?, ?, ?, ?)";
         try{
             conBD = con.getConnection();
             consulta = conBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

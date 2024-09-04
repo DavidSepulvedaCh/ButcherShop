@@ -12,40 +12,39 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #10151D, #1c2331);;" stylesheets="@assets/styles/login.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
-      <Text layoutX="152.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CARNICERIA SF" wrappingWidth="295.13671875">
+      <Text fill="WHITE" layoutX="152.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-title" text="CARNICERIA SF" wrappingWidth="295.13671875">
          <font>
             <Font name="Nirmala UI" size="43.0" />
          </font>
       </Text>
-      <TextField fx:id="txt_username" layoutX="49.0" layoutY="140.0" prefHeight="35.0" prefWidth="233.0" promptText="Nombre de usuario" style="-fx-background-radius: 10;">
+      <TextField fx:id="txt_username" layoutX="53.0" layoutY="149.0" prefHeight="41.0" prefWidth="250.0" promptText="Nombre de usuario" styleClass="text-field">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
          <cursor>
-            <Cursor fx:constant="SW_RESIZE" />
+            <Cursor fx:constant="DEFAULT" />
          </cursor>
       </TextField>
-      <PasswordField fx:id="txt_clave" layoutX="49.0" layoutY="233.0" prefHeight="35.0" prefWidth="233.0" promptText="Contraseña" style="-fx-background-radius: 10; -fx-cursor: pointer;" />
-      <Label layoutX="49.0" layoutY="106.0" text="Nombre de usuario">
+      <PasswordField fx:id="txt_clave" layoutX="54.0" layoutY="241.0" prefHeight="41.0" prefWidth="250.0" promptText="Contraseña" style="-fx-background-radius: 10; -fx-cursor: pointer;" stylesheets="@style.css" />
+      <Label layoutX="50.0" layoutY="119.0" text="Nombre de usuario" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="49.0" layoutY="199.0" prefHeight="27.0" prefWidth="112.0" text="Contraseña">
+      <Label layoutX="51.0" layoutY="212.0" prefHeight="27.0" prefWidth="112.0" text="Contraseña" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button id="btn_logn" fx:id="btn_login" layoutX="115.0" layoutY="304.0" mnemonicParsing="false" onAction="#btnEvent" prefHeight="35.0" prefWidth="92.0" style="-fx-background-color: #272D2D; -fx-background-radius: 10;" text="Ingresar" textFill="WHITE">
+      <Button id="btn_logn" fx:id="btn_login" layoutX="84.0" layoutY="322.0" mnemonicParsing="false" onAction="#btnEvent" prefHeight="21.0" prefWidth="191.0" text="Ingresar" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <ImageView fitHeight="265.0" fitWidth="254.0" layoutX="320.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="197.0" fitWidth="225.0" layoutX="338.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../../../UPB/VII/Emprendimiento/lOGO.png" />
-         </image>
-      </ImageView>
+            <Image url="@assets/Logos/Logo_Png.png" />
+         </image></ImageView>
    </children>
 </AnchorPane>

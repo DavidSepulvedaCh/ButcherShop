@@ -1,0 +1,90 @@
+.anchor-pane{
+    -fx-background-color:  linear-gradient(from 0% 0% to 100% 100%, #10151D, #1c2331);
+}
+
+.text-field {
+  -fx-background-color: #515151;
+  -fx-background-insets: 0, 1;
+  -fx-background-radius: 8;
+  -fx-padding: 10;
+  -fx-border-color: #606a7f;
+  -fx-border-radius: 8;
+  -fx-border-width: 1;
+  -fx-text-fill: #ffffff;
+  -fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);
+  -fx-font-size: 15px;
+  -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.button {
+  -fx-background-color: #606a7f, linear-gradient(#5a6471, #484f59);
+  -fx-background-radius: 8;
+  -fx-background-insets: 0;
+  -fx-text-fill: #ffffff;
+  -fx-padding: 10 20;
+  -fx-font-size: 14px;
+  -fx-font-family: "Segoe UI", sans-serif;
+  -fx-cursor: hand;
+  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 5, 0, 0, 3);
+}
+
+.button:hover {
+  -fx-background-color: #505a68, linear-gradient(#4a525f, #3a4049);
+}
+
+.button:pressed {
+  -fx-background-color: #404854, linear-gradient(#363e4a, #2f353e);
+  -fx-effect: none;
+}
+
+.label-title {
+    -fx-font-size: 36px;
+    -fx-font-weight: Bold;
+    -fx-text-alignment: center;
+    -fx-text-fill: linear-gradient(
+        from 0% 0% to 100% 100%,
+        #d7d7d7,
+        #8e8e8e,
+        #3a3a3a
+    );
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+
+.label {
+  -fx-font-size: 16px;
+  -fx-font-family: "Segoe UI", sans-serif;
+  -fx-text-fill: #ffffff;
+  -fx-background-color: transparent;
+  -fx-padding: 5;
+  -fx-text-alignment: center;
+}
+
+.text-field, .password-field {
+  -fx-background-color: #424242;
+  -fx-background-insets: 0, 1;
+  -fx-background-radius: 8;
+  -fx-padding: 10;
+  -fx-border-color: #606a7f;
+  -fx-border-radius: 8;
+  -fx-border-width: 1;
+  -fx-text-fill: #ffffff;
+  -fx-prompt-text-fill: derive(-fx-background-color, -50%);
+  -fx-font-size: 15px;
+  -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.text-field:focused, .password-field:focused {
+  -fx-border-color: #8e9fbb;
+  -fx-background-color: #333333;
+}
+
+.text-field:hover, .password-field:hover {
+  -fx-border-color: #8e9fbb;
+}
+
+.text-field:disabled, .password-field:disabled {
+  -fx-background-color: #2a2a2a;
+  -fx-border-color: #4d4d4d;
+  -fx-text-fill: #7d7d7d;
+}
