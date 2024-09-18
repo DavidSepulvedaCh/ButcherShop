@@ -94,7 +94,6 @@ public class BuyResController {
 
     public void showBuyRes(TableView<BuyResModel> tableBuyRes, TableColumn<BuyResModel, String> tipoColumn, TableColumn<BuyResModel, String> pesoColumn, TableColumn<BuyResModel, String> precioCompraColumn, TableColumn<BuyResModel, String> fechaColumn, TableColumn<BuyResModel, String> proveedorColumn ){
         ObservableList<BuyResModel> purchasesList = getAllPurchases();
-        // Celdas tabla COMPRA ANIMAL
         tipoColumn.setCellValueFactory(new PropertyValueFactory<>("tipoAnimal"));
         pesoColumn.setCellValueFactory(new PropertyValueFactory<>("pesoArrobas"));
         precioCompraColumn.setCellValueFactory(new PropertyValueFactory<>("precioArroba"));

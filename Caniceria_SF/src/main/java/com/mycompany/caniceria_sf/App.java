@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import javafx.scene.image.Image;
+
 
 
 public class App extends Application {
@@ -16,6 +18,8 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("login"), 640, 480);
         stage.setScene(scene);
+        stage.setTitle("Chávez Carniceria");
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("assets/Logos/Logo_APP.png")));
         stage.show();
     }
 
