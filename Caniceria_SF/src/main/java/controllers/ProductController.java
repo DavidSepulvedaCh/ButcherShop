@@ -64,6 +64,20 @@ public class ProductController {
 
     }
 
+    public boolean deleteProduct(String productId) {
+        String sql = "DELETE FROM productos WHERE id = ?";
+        try {
+            conBD = con.getConnection();
+            consulta = conBD.prepareStatement(sql);
+            consulta.setString(1, productId);
+            int rowsAffected = consulta.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar el producto: " + e.getMessage());
+            return false;
+        }
+    }
+
 
     public ObservableList<ProductModel> getAllProducts() {
         String sql = "SELECT * FROM productos";

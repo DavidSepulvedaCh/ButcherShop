@@ -121,10 +121,10 @@
                               <TableView fx:id="tableVenta" layoutX="14.0" layoutY="100.0" prefHeight="215.0" prefWidth="673.0">
                                 <columns>
                                   <TableColumn fx:id="codigoVentaColumn" prefWidth="88.0" text="CODIGO" />
-                                  <TableColumn fx:id="productVentaColumn" prefWidth="176.0" text="PRODUCTO" />
+                                  <TableColumn fx:id="productoVentaColumn" prefWidth="176.0" text="PRODUCTO" />
                                     <TableColumn fx:id="cantidadVentaColumn" prefWidth="134.0" text="CANTIDAD (Lb)" />
                                     <TableColumn fx:id="precioVentaColumn" minWidth="0.0" prefWidth="154.0" text="PRECIO (Lb)" />
-                                    <TableColumn fx:id="totalProductoVentaColumn" minWidth="0.0" prefWidth="120.0" text="TOTAL" />
+                                    <TableColumn fx:id="totalVentaColumn" minWidth="0.0" prefWidth="120.0" text="TOTAL" />
                                 </columns>
                               </TableView>
                               <Button fx:id="btnImprimirFactura" layoutX="588.0" layoutY="336.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="99.0" text="Imprimir" textFill="WHITE">
@@ -228,15 +228,6 @@
                                     <String fx:value="button-print" />
                                  </styleClass>
                               </Button>
-                              <Button fx:id="btnExcel" layoutX="29.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="108.0" text="Hoja Excel" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arial Bold" size="16.0" />
-                                 </font>
-                                 <styleClass>
-                                    <String fx:value="buttonn" />
-                                    <String fx:value="button-excel" />
-                                 </styleClass>
-                              </Button>
                               <TableView fx:id="tableProduct" layoutX="332.0" layoutY="35.0" onMouseClicked="#getValues" prefHeight="329.0" prefWidth="338.0">
                                 <columns>
                                   <TableColumn fx:id="codigoColumn" prefWidth="81.0" text="CODIGO" />
@@ -252,14 +243,12 @@
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <TableView layoutX="21.0" layoutY="69.0" prefHeight="267.0" prefWidth="662.0">
+                              <TableView fx:id="inventarioVenta" layoutX="21.0" layoutY="69.0" prefHeight="267.0" prefWidth="662.0">
                                 <columns>
-                                  <TableColumn prefWidth="69.0" text="ID Venta" />
-                                  <TableColumn prefWidth="101.0" text="Fecha" />
-                                    <TableColumn prefWidth="107.0" text="Vendedor" />
-                                    <TableColumn prefWidth="151.0" text="Producto" />
-                                    <TableColumn prefWidth="109.0" text="Cantidad" />
-                                    <TableColumn prefWidth="119.0" text="Total" />
+                                  <TableColumn fx:id="idVentaColumn" prefWidth="110.0" text="Id de Venta" />
+                                  <TableColumn fx:id="fechaVentaColumn" prefWidth="188.0" text="Fecha" />
+                                    <TableColumn fx:id="vendedorColumn" prefWidth="210.0" text="Vendedor" />
+                                    <TableColumn fx:id="totalColumn" prefWidth="153.0" text="Total" />
                                 </columns>
                               </TableView>
                               <Button fx:id="btnInventarioPDF" layoutX="21.0" layoutY="23.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="129.0" text="Generar PDF" textFill="WHITE">
