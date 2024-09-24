@@ -6,14 +6,14 @@
 
 Esta es una aplicación de escritorio desarrollada en JavaFX para gestionar el inventario de una carnicería. La aplicación permite llevar un control detallado de diversos aspectos relacionados con el funcionamiento de la carnicería, incluyendo:
 
-- Registro de la compra de animales a sacrificar.
+- Registro de la compra de animales para beneficio.
 - Compra de utensilios para la carnicería.
 - Registro de tipos de carnes con su respectivo valor.
 - Generación de documentos PDF con el inventario de cada apartado.
 
 ## Características ✨
 
-- **Gestión de Animales**: Registro y control de la compra de animales para sacrificar.
+- **Gestión de Animales**: Registro y control de la compra de animales para beneficio.
 - **Utensilios de Carnicería**: Registro de la compra de utensilios necesarios para la operación.
 - **Tipos de Carnes**: Registro y actualización de tipos de carnes disponibles con precios asociados.
 - **Generación de PDF**: Creación de documentos PDF con el inventario detallado para cada categoría.
