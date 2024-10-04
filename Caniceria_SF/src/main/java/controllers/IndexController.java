@@ -1,15 +1,22 @@
 package controllers;
 
+import com.mycompany.caniceria_sf.App;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import models.*;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 
@@ -154,6 +161,8 @@ public class IndexController {
         insumoController.showInsumos(tableBuyInsumo, tipoInsumoColumn, precioInsumoColumn, cantidadInsumoColumn, proveedorInsumoColumn, fechaInsumoColumn, descripcionInsumoColumn);
         inventarioController.showInventario(tableInventario, idVentaColumn,  vendedorColumn, totalColumn, fechaVentaColumn);
         ventaController.showProducts(tableVenta, codigoVentaColumn, productoVentaColumn, cantidadVentaColumn, precioVentaColumn, totalVentaColumn);
+
+
     }
     @FXML
     public void getValues(MouseEvent mouseEvent){
@@ -310,5 +319,15 @@ public class IndexController {
     public void printProductos(){ productController.printProducts();}
     public void printCompras(){buyResPrint.printProducts();}
     public void printInsimos(){insumosPrint.printProducts();}
+
+    public void viewDetail(MouseEvent mouseEvent) {
+        InventarioModel fila = (InventarioModel) tableInventario.getSelectionModel().getSelectedItem();
+        if (fila != null) {
+            idProducto = fila.getId();
+        } else {
+            System.out.println("No se ha seleccionado ninguna fila.");
+        }
+        inventarioController.alerta(idProducto);
+    }
 
 }

@@ -243,7 +243,7 @@
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="tableInventario" layoutX="21.0" layoutY="69.0" prefHeight="267.0" prefWidth="662.0">
+                              <TableView fx:id="tableInventario" layoutX="21.0" layoutY="69.0" onMouseClicked="#viewDetail" prefHeight="267.0" prefWidth="662.0">
                                 <columns>
                                   <TableColumn fx:id="idVentaColumn" prefWidth="110.0" text="Id de Venta" />
                                   <TableColumn fx:id="fechaVentaColumn" prefWidth="188.0" text="Fecha" />
