@@ -19,6 +19,8 @@ public class IndexController {
     @FXML
     private TableView tableVenta;
     @FXML
+    private TableView tableInventario;
+    @FXML
     private TableColumn<InventarioModel, String> idVentaColumn;
     @FXML
     private TableColumn<InventarioModel, String> vendedorColumn;
@@ -150,7 +152,7 @@ public class IndexController {
         productController.showTableProducts(tableProduct, codigoColumn, precioColumn, productoColumn);
         buyResController.showBuyRes(tableBuyRes, tipoColumn, pesoColumn, precioCompraColumn, fechaColumn, proveedorColumn);
         insumoController.showInsumos(tableBuyInsumo, tipoInsumoColumn, precioInsumoColumn, cantidadInsumoColumn, proveedorInsumoColumn, fechaInsumoColumn, descripcionInsumoColumn);
-        inventarioController.showVentas(tableVenta, idVentaColumn,  vendedorColumn, totalColumn, fechaVentaColumn);
+        inventarioController.showInventario(tableInventario, idVentaColumn,  vendedorColumn, totalColumn, fechaVentaColumn);
         ventaController.showProducts(tableVenta, codigoVentaColumn, productoVentaColumn, cantidadVentaColumn, precioVentaColumn, totalVentaColumn);
     }
     @FXML

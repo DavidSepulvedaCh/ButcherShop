@@ -70,11 +70,11 @@ public class LoginController implements Initializable {
                 String clave = txt_clave.getText();
                 LoginModel l = new LoginModel();
                 l = login(user, clave);
-                if(l.getUserName()!=null && l.getClave()!=null){
+                if(l.getUserName() != null && l.getClave() != null){
                     FXMLLoader loader = new FXMLLoader(App.class.getResource("index" + ".fxml"));
                     Parent indexRoot = loader.load();
                     IndexController indexController = loader.getController();
-                    indexController.setUserName(user);
+                    indexController.setUserName(l.getUserName());
                     Scene indexScene = new Scene(indexRoot);
                     Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     primaryStage.setScene(indexScene);
@@ -87,6 +87,7 @@ public class LoginController implements Initializable {
             }
         }
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb){

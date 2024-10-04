@@ -45,13 +45,13 @@ public class InventarioController {
         tableVenta.setItems(ventaList);
     }
 
-    public void showVentas(TableView<InventarioModel> tableVenta, TableColumn<InventarioModel, String> idVentaColumn, TableColumn<InventarioModel, String> vendedorColumn, TableColumn<InventarioModel, Double> totalColumn, TableColumn<InventarioModel, String> fechaColumn){
+    public void showInventario(TableView<InventarioModel> tableInventario, TableColumn<InventarioModel, String> idVentaColumn, TableColumn<InventarioModel, String> vendedorColumn, TableColumn<InventarioModel, Double> totalColumn, TableColumn<InventarioModel, String> fechaColumn){
         ObservableList<InventarioModel> ventas = getAllVentas();
 
         idVentaColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         vendedorColumn.setCellValueFactory(new PropertyValueFactory<>("vendedor"));
         totalColumn.setCellValueFactory(new PropertyValueFactory<>("total"));
         fechaColumn.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-        tableVenta.setItems(ventas);
+        tableInventario.setItems(ventas);
     }
 }
