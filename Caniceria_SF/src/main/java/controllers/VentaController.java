@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.Productos.ProductController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;

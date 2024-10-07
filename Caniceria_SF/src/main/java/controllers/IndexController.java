@@ -1,24 +1,25 @@
 package controllers;
 
-import com.mycompany.caniceria_sf.App;
+import controllers.BuyRes.BuyResController;
+import controllers.BuyRes.BuyResPrint;
+import controllers.Insumos.InsumoController;
+import controllers.Insumos.InsumosPrint;
+import controllers.Productos.ProductController;
+import controllers.Productos.ProductPrint;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import models.*;
+import services.BuyResVerifier;
+import services.InsumoVerifier;
+import services.Producto.DeleteProduct;
+import services.Producto.RegProductoVerifier;
 
 import javax.swing.*;
-import java.io.IOException;
 import java.sql.*;
-import java.time.LocalDate;
 
 public class IndexController {
     @FXML
@@ -48,10 +49,15 @@ public class IndexController {
     private ProductController productController;
     private VentaController ventaController;
     private BuyResPrint buyResPrint;
+    private ProductPrint productPrint;
+    private InsumoVerifier insumoVerifier;
+    private BuyResVerifier buyResVerifier;
+    private RegProductoVerifier regProductoVerifier;
     private InsumosPrint insumosPrint;
     private BuyResController buyResController;
     private InsumoController insumoController;
     private InventarioController inventarioController;
+    private DeleteProduct deleteProduct;
     @FXML
     private TextField txtClienteVenta;
     @FXML
@@ -146,6 +152,11 @@ public class IndexController {
         ventaController = new VentaController(txtCodgoProductoVenta, txtProducto, txtPrecioProducto, txtCantidadProducto, txtClienteVenta, lblTotal, tableVenta, productController);
         buyResPrint = new BuyResPrint();
         insumosPrint = new InsumosPrint();
+        productPrint = new ProductPrint();
+        insumoVerifier = new InsumoVerifier();
+        buyResVerifier = new BuyResVerifier();
+        regProductoVerifier = new RegProductoVerifier();
+        deleteProduct = new DeleteProduct(productController);
     }
 
     public void initialize() {
@@ -161,8 +172,6 @@ public class IndexController {
         insumoController.showInsumos(tableBuyInsumo, tipoInsumoColumn, precioInsumoColumn, cantidadInsumoColumn, proveedorInsumoColumn, fechaInsumoColumn, descripcionInsumoColumn);
         inventarioController.showInventario(tableInventario, idVentaColumn,  vendedorColumn, totalColumn, fechaVentaColumn);
         ventaController.showProducts(tableVenta, codigoVentaColumn, productoVentaColumn, cantidadVentaColumn, precioVentaColumn, totalVentaColumn);
-
-
     }
     @FXML
     public void getValues(MouseEvent mouseEvent){
@@ -177,38 +186,11 @@ public class IndexController {
         }
     }
 
-    public void deleteProduct() {
-        if (!idProducto.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Eliminar producto");
-            alert.setHeaderText("¿Estás seguro de que deseas eliminar el producto " + nombreProducto + " ?");
-
-            ButtonType buttonTypeYes = new ButtonType("Eliminar");
-            ButtonType buttonTypeNo = new ButtonType("Cancelar");
-            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
-
-            alert.showAndWait().ifPresent(response -> {
-                if (response == buttonTypeYes) {
-                    if (productController.deleteProduct(idProducto)) {
-                        JOptionPane.showMessageDialog(null, "El producto se eliminó exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                        productController.updateProducts(tableProduct);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Error al eliminar el producto", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    System.out.println("Acción cancelada por el usuario.");
-                }
-            });
-        } else {
-            JOptionPane.showMessageDialog(null, "No has seleccionado un producto", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+    @FXML
+    public void deleteProduct() { deleteProduct.deleteProduct(idProducto, nombreProducto, tableProduct); }
 
     @FXML
-    public void enterCode(KeyEvent event) {
-        ventaController.handleEnterCode(event);
-    }
-
+    public void enterCode(KeyEvent event) { ventaController.handleEnterCode(event); }
     public void handleVentaButton(){ tabPane.getSelectionModel().select(0); }
     public void handleProductosButton(){ tabPane.getSelectionModel().select(1); }
     public void handleinventarioButton(){ tabPane.getSelectionModel().select(2); }
@@ -217,91 +199,11 @@ public class IndexController {
     public void setUserName(String userName) { lbl_username.setText(userName); }
 
     public void verificarRegProduct() throws SQLException {
-        if (!txtCodigoProductoReg.getText().isEmpty() && !txtProductoReg.getText().isEmpty() && !txtPrecioReg.getText().isEmpty()) {
-            String codeProduct = txtCodigoProductoReg.getText();
-            String nameProduct = txtProductoReg.getText();
-            String priceProduct = txtPrecioReg.getText();
-
-            productController.verifyRegProducts(codeProduct,nameProduct, priceProduct);
-
-            if (productController.registroExitoso) {
-                JOptionPane.showMessageDialog(null, "Registro de producto exitoso", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                txtCodigoProductoReg.setText("");
-                txtProductoReg.setText("");
-                txtPrecioReg.setText("");
-                productController.updateProducts(tableProduct);
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al registrar el producto", "Error", JOptionPane.ERROR_MESSAGE);
-                txtCodigoProductoReg.setText("");
-                txtProductoReg.setText("");
-                txtPrecioReg.setText("");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Faltan campos por completar", "Error", JOptionPane.WARNING_MESSAGE);
-        }
+        regProductoVerifier.verificarRegProduct(tableProduct, txtCodigoProductoReg, txtProductoReg, txtPrecioReg);
     }
 
-    public void vefiryBuyRes() throws SQLException {
-        if (!txtPesoArroba.getText().isEmpty() && !txtPrecioArroba.getText().isEmpty() && !txtProveedor.getText().isEmpty() && cbxTipoAnimal.getValue() != null && lblFechaCompra.getValue() != null) {
-            String pesoArroba = txtPesoArroba.getText();
-            String precioArroba = txtPrecioArroba.getText();
-            String proveedor = txtProveedor.getText();
-            LocalDate fecha = lblFechaCompra.getValue();
-            String tipo = cbxTipoAnimal.getValue().toString();
-
-            buyResController.verifyBuyRes(pesoArroba,precioArroba,proveedor,fecha,tipo);
-            if(buyResController.buySuccess){
-                txtProveedor.setText("");
-                txtPrecioArroba.setText("");
-                txtPesoArroba.setText("");
-                lblFechaCompra.setValue(null);
-                cbxTipoAnimal.setValue(0);
-                buyResController.updatePurchases(tableBuyRes);
-            }else{
-                txtProveedor.setText("");
-                txtPrecioArroba.setText("");
-                txtPesoArroba.setText("");
-                lblFechaCompra.setValue(null);
-                cbxTipoAnimal.setValue(0);
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Faltan campos por completar", "Error", JOptionPane.WARNING_MESSAGE);
-        }
-    }
-
-    public void verifyInsumo(){
-        if(!txtPrecioInsumo.getText().isEmpty() && !txtCantidadInsumo.getText().isEmpty() && !txtProveedorInsumo.getText().isEmpty() && lblFechaInsumo.getValue() != null && cbxTipoInsumo.getValue() != null){
-            String precioInsumo = txtPrecioInsumo.getText();
-            String cantidadInsumo = txtCantidadInsumo.getText();
-            String proveedorInsumo = txtProveedorInsumo.getText();
-            String insumo = cbxTipoInsumo.getValue().toString();
-            String descripcionInsumo = txtDescripcionInsumo.getText();
-            LocalDate fechaInsumo = lblFechaInsumo.getValue();
-
-            insumoController.verifyInsumo(precioInsumo, cantidadInsumo, proveedorInsumo, fechaInsumo, insumo, descripcionInsumo);
-            if(insumoController.insumoSuccess == true){
-                txtProveedorInsumo.setText("");
-                txtCantidadInsumo.setText("");
-                txtPrecioInsumo.setText("");
-                cbxTipoInsumo.setValue(0);
-                lblFechaInsumo.setValue(null);
-                txtDescripcionInsumo.setText("");
-                insumoController.updateInsumos(tableBuyInsumo);
-            }else{
-                JOptionPane.showMessageDialog(null, "Error al registrar la compra", "Error", JOptionPane.ERROR_MESSAGE);
-                txtProveedorInsumo.setText("");
-                txtCantidadInsumo.setText("");
-                txtCantidadInsumo.setText("");
-                cbxTipoInsumo.setValue(0);
-                txtDescripcionInsumo.setText("");
-                lblFechaInsumo.setValue(null);
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "Faltan campos por completar", "Error", JOptionPane.WARNING_MESSAGE);
-        }
-    }
+    public void vefiryBuyRes() { buyResVerifier.vefiryBuyRes(txtPesoArroba, txtPrecioArroba, txtProveedor, lblFechaCompra, cbxTipoAnimal, tableBuyRes); }
+    public void verifyInsumo() { insumoVerifier.verifyInsumo(txtPrecioInsumo, txtCantidadInsumo, txtProveedorInsumo, lblFechaInsumo, cbxTipoInsumo, txtDescripcionInsumo, tableBuyInsumo); }
 
     public void addProduct() {
         nombreProducto = txtProducto.getText();
@@ -316,10 +218,9 @@ public class IndexController {
             JOptionPane.showMessageDialog(null, "Faltan campos por completar", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }
-    public void printProductos(){ productController.printProducts();}
+    public void printProductos(){ productPrint.printProducts();}
     public void printCompras(){buyResPrint.printProducts();}
     public void printInsimos(){insumosPrint.printProducts();}
-
     public void viewDetail(MouseEvent mouseEvent) {
         InventarioModel fila = (InventarioModel) tableInventario.getSelectionModel().getSelectedItem();
         if (fila != null) {
