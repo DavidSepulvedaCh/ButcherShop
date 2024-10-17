@@ -7,16 +7,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import models.ConnectionBD;
 import models.DetalleVentaModel;
+import models.InventarioModel;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.swing.*;
+import java.sql.*;
 
 public class DetalleVentaController {
-    ConnectionBD con = new ConnectionBD();
 
     @FXML
     private TableView<DetalleVentaModel> tableDetail;
@@ -26,7 +25,16 @@ public class DetalleVentaController {
     private TableColumn<DetalleVentaModel, String> quantityDtColumn;
     @FXML
     private TableColumn<DetalleVentaModel, String> priceDtColumn;
-
+    @FXML
+    public TableView<InventarioModel> tableInventario;
+    @FXML
+    public TableColumn<InventarioModel, String> idVentaColumn;
+    @FXML
+    public TableColumn<InventarioModel, String> vendedorColumn;
+    @FXML
+    public TableColumn<InventarioModel, Double> totalColumn;
+    @FXML
+    public TableColumn<InventarioModel, String> fechaVentaColumn;
     @FXML
     private Label dateDt;
     @FXML
@@ -35,8 +43,13 @@ public class DetalleVentaController {
     private Label totalDt;
     @FXML
     private Label clientDt;
+    ConnectionBD con = new ConnectionBD();
+    private String idVenta = "";
+    private Stage detailStage;
+    private InventarioController inventarioController;
 
     public ObservableList<DetalleVentaModel> getDetail(String id) {
+        idVenta = id;
         String sql = "SELECT d.producto, d.precio, d.cantidad, v.vendedor, v.total, v.fecha, v.cliente " +
                 "FROM detalleventa d " +
                 "JOIN venta v ON d.idventa = v.id " +
@@ -63,9 +76,12 @@ public class DetalleVentaController {
         return detalles;
     }
 
-    public void fetchAndShowDetail(String idVenta) {
+    public void fetchAndShowDetail(String idVenta, Stage stage, InventarioController inventarioController) {
+        this.detailStage = stage;
+        this.inventarioController = inventarioController;
         showDetail(idVenta);
     }
+
 
     public void showDetail(String idVenta) {
         productDtColumn.setCellValueFactory(new PropertyValueFactory<>("producto"));
@@ -74,5 +90,56 @@ public class DetalleVentaController {
 
         ObservableList<DetalleVentaModel> detalles = getDetail(idVenta);
         tableDetail.setItems(detalles);
+    }
+
+    public void deleteSale() {
+        String sqlDetalleVenta = "DELETE FROM detalleventa WHERE idVenta = ?";
+        String sqlVenta = "DELETE FROM venta WHERE id = ?";
+
+        Connection conBD = null;
+        PreparedStatement consultaDetalle = null;
+        PreparedStatement consultaVenta = null;
+
+        try {
+            conBD = con.getConnection();
+            conBD.setAutoCommit(false);
+
+            consultaDetalle = conBD.prepareStatement(sqlDetalleVenta);
+            consultaDetalle.setString(1, idVenta);
+            consultaDetalle.executeUpdate();
+
+            consultaVenta = conBD.prepareStatement(sqlVenta);
+            consultaVenta.setString(1, idVenta);
+            consultaVenta.executeUpdate();
+
+            conBD.commit();
+
+            JOptionPane.showMessageDialog(null, "¡La venta se ha eliminado exitosamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+            if (detailStage != null) {
+                detailStage.close();
+            }
+
+            inventarioController.showInventario(tableInventario, idVentaColumn,  vendedorColumn, totalColumn, fechaVentaColumn);
+
+        } catch (SQLException e) {
+            if (conBD != null) {
+                try {
+                    conBD.rollback();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            throw new RuntimeException(e);
+
+        } finally {
+            try {
+                if (consultaDetalle != null) consultaDetalle.close();
+                if (consultaVenta != null) consultaVenta.close();
+                if (conBD != null) conBD.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

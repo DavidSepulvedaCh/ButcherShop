@@ -95,6 +95,24 @@ public class VentaController {
         }
     }
 
+    public void removeProduct() {
+        DetalleVentaModel selectedProduct = tableVenta.getSelectionModel().getSelectedItem();
+
+        if (selectedProduct != null) {
+            double totalProducto = Double.parseDouble(selectedProduct.getTotal());
+
+            ventaList.remove(selectedProduct);
+
+            totalVenta -= totalProducto;
+
+            updateVenta(this.tableVenta);
+            this.lblTotal.setText(String.valueOf(totalVenta));
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un producto para eliminar", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+
     private void clearFields() {
         txtProducto.setText("");
         txtCantidadProducto.setText("");
@@ -165,7 +183,7 @@ public class VentaController {
                 detalleVentaStmt.setString(2, detalle.getProducto());
                 detalleVentaStmt.setInt(3, Integer.parseInt(detalle.getCantidad()));
                 detalleVentaStmt.setDouble(4, Double.parseDouble(detalle.getPrecio()));
-                detalleVentaStmt.setInt(5, idVenta);  // Usamos el ID generado aquí
+                detalleVentaStmt.setInt(5, idVenta);
                 detalleVentaStmt.addBatch();
             }
 

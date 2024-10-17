@@ -35,6 +35,7 @@ public class InventarioController {
     @FXML
     private Label totalDt;
 
+
     ConnectionBD con = new ConnectionBD();
     ObservableList<InventarioModel> ventaList = FXCollections.observableArrayList();
 
@@ -100,9 +101,9 @@ public class InventarioController {
 
             DetalleVentaController detalleVentaController = loader.getController();
 
-            detalleVentaController.fetchAndShowDetail(idVenta);
-
             Stage detailStage = new Stage();
+            detalleVentaController.fetchAndShowDetail(idVenta, detailStage, this); // Pasar la referencia del Stage y el controlador
+
             detailStage.setTitle("Detalles de la Venta");
             detailStage.initModality(Modality.APPLICATION_MODAL);
             Scene detailScene = new Scene(root);
@@ -112,5 +113,7 @@ public class InventarioController {
             System.err.println("Error al cargar el archivo FXML: " + e.getMessage());
         }
     }
+
+
 
 }

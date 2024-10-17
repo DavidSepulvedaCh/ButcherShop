@@ -9,27 +9,27 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="398.0" prefWidth="588.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #10151D, #1c2331);" stylesheets="@assets/styles/index.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DetalleVentaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="398.0" prefWidth="643.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #10151D, #1c2331);" stylesheets="@assets/styles/index.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DetalleVentaController">
    <children>
-      <Text fill="WHITE" layoutX="134.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-title" text="DETALLE DE VENTA" textAlignment="CENTER" />
-      <TableView fx:id="tableDetail" layoutX="94.0" layoutY="129.0" prefHeight="200.0" prefWidth="413.0">
+      <Text fill="WHITE" layoutX="156.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-title" text="DETALLE DE VENTA" textAlignment="CENTER" />
+      <TableView fx:id="tableDetail" layoutX="87.0" layoutY="129.0" prefHeight="200.0" prefWidth="469.0">
         <columns>
-          <TableColumn fx:id="productDtColumn" prefWidth="144.0" text="PRODUCTO" />
-          <TableColumn fx:id="quantityDtColumn" prefWidth="140.0" text="CANTIDAD" />
-            <TableColumn fx:id="priceDtColumn" prefWidth="128.0" text="PRECIO" />
+          <TableColumn fx:id="productDtColumn" prefWidth="181.0" text="PRODUCTO" />
+          <TableColumn fx:id="quantityDtColumn" prefWidth="149.0" text="CANTIDAD" />
+            <TableColumn fx:id="priceDtColumn" prefWidth="138.0" text="PRECIO" />
         </columns>
       </TableView>
       <Label layoutX="36.0" layoutY="82.0" styleClass="label-user" text="Fecha:" textFill="WHITE" />
       <Label fx:id="dateDt" layoutX="105.0" layoutY="82.0" prefHeight="24.0" prefWidth="128.0" styleClass="label-user" text="date" />
       <Label layoutX="333.0" layoutY="82.0" styleClass="label-user" text="Vendedor:" textFill="WHITE" />
-      <Label fx:id="sellerDt" layoutX="438.0" layoutY="82.0" prefHeight="24.0" prefWidth="142.0" styleClass="label-user" text="Vendedor" textFill="WHITE" />
-      <Button layoutX="354.0" layoutY="346.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" text="Imprimir">
+      <Label fx:id="sellerDt" layoutX="441.0" layoutY="82.0" prefHeight="24.0" prefWidth="178.0" styleClass="label-user" text="Vendedor" textFill="WHITE" />
+      <Button layoutX="396.0" layoutY="346.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" text="Imprimir">
          <styleClass>
             <String fx:value="button-print" />
             <String fx:value="buttonn" />
          </styleClass>
       </Button>
-      <Button layoutX="471.0" layoutY="346.0" mnemonicParsing="false" text="Eliminar">
+      <Button fx:id="btnDeleteSale" layoutX="530.0" layoutY="346.0" mnemonicParsing="false" onAction="#deleteSale" text="Eliminar">
          <styleClass>
             <String fx:value="button-delete" />
             <String fx:value="buttonn" />

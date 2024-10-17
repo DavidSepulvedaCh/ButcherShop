@@ -20,6 +20,7 @@ import services.Producto.DeleteProduct;
 import services.Producto.RegProductoVerifier;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.sql.*;
 
 public class IndexController {
@@ -187,6 +188,7 @@ public class IndexController {
         }
     }
 
+    //Eliminar x producto registrado en la BD
     @FXML
     public void deleteProduct() { deleteProduct.deleteProduct(idProducto, nombreProducto, tableProduct); }
 
@@ -206,6 +208,7 @@ public class IndexController {
     public void vefiryBuyRes() { buyResVerifier.vefiryBuyRes(txtPesoArroba, txtPrecioArroba, txtProveedor, lblFechaCompra, cbxTipoAnimal, tableBuyRes); }
     public void verifyInsumo() { insumoVerifier.verifyInsumo(txtPrecioInsumo, txtCantidadInsumo, txtProveedorInsumo, lblFechaInsumo, cbxTipoInsumo, txtDescripcionInsumo, tableBuyInsumo); }
 
+    // Agregar producto a la tabla de venta
     public void addProduct() {
         nombreProducto = txtProducto.getText();
         codigoProducto = txtCodgoProductoVenta.getText();
@@ -218,6 +221,12 @@ public class IndexController {
         } else {
             JOptionPane.showMessageDialog(null, "Faltan campos por completar", "Error", JOptionPane.WARNING_MESSAGE);
         }
+    }
+
+    //Eliminar producto de la tabla de venta
+    @FXML
+    private void handleRemoveProduct() {
+        ventaController.removeProduct();
     }
 
     @FXML
