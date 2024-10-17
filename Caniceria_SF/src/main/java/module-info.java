@@ -20,4 +20,6 @@ module com.mycompany.caniceria_sf {
     opens controllers.Insumos to javafx.fxml;
     exports controllers.Productos;
     opens controllers.Productos to javafx.fxml;
+    exports controllers.Sale;
+    opens controllers.Sale to javafx.fxml;
 }

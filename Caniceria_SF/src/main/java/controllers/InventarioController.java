@@ -61,10 +61,6 @@ public class InventarioController {
         return ventas;
     }
 
-    public void updateVenta(TableView<InventarioModel> tableVenta) {
-        tableVenta.setItems(ventaList);
-    }
-
     public void showInventario(TableView<InventarioModel> tableInventario, TableColumn<InventarioModel, String> idVentaColumn, TableColumn<InventarioModel, String> vendedorColumn, TableColumn<InventarioModel, Double> totalColumn,  TableColumn<InventarioModel, String> fechaColumn) {
         ObservableList<InventarioModel> ventas = getAllVentas();
 

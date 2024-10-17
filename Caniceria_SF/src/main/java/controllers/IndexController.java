@@ -6,6 +6,7 @@ import controllers.Insumos.InsumoController;
 import controllers.Insumos.InsumosPrint;
 import controllers.Productos.ProductController;
 import controllers.Productos.ProductPrint;
+import controllers.Sale.VentaController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -149,7 +150,7 @@ public class IndexController {
         buyResController = new BuyResController();
         insumoController = new InsumoController();
         inventarioController = new InventarioController();
-        ventaController = new VentaController(txtCodgoProductoVenta, txtProducto, txtPrecioProducto, txtCantidadProducto, txtClienteVenta, lblTotal, tableVenta, productController);
+        ventaController = new VentaController(txtCodgoProductoVenta, txtProducto, txtPrecioProducto, txtCantidadProducto, txtClienteVenta, lblTotal, tableVenta, productController, lbl_username);
         buyResPrint = new BuyResPrint();
         insumosPrint = new InsumosPrint();
         productPrint = new ProductPrint();
@@ -165,7 +166,7 @@ public class IndexController {
         ObservableList<String> opcionesInsumos = FXCollections.observableArrayList("Bolsas plasticas", "Bolsas al vacio", "Limpido", "Vinagre", "Carbon");
         cbxTipoInsumo.setItems(opcionesInsumos);
 
-        ventaController = new VentaController(txtCodgoProductoVenta, txtProducto, txtPrecioProducto, txtCantidadProducto, txtClienteVenta, lblTotal, tableVenta, productController);
+        ventaController = new VentaController(txtCodgoProductoVenta, txtProducto, txtPrecioProducto, txtCantidadProducto, txtClienteVenta, lblTotal, tableVenta, productController, lbl_username);
 
         productController.showTableProducts(tableProduct, codigoColumn, precioColumn, productoColumn);
         buyResController.showBuyRes(tableBuyRes, tipoColumn, pesoColumn, precioCompraColumn, fechaColumn, proveedorColumn);
@@ -218,6 +219,18 @@ public class IndexController {
             JOptionPane.showMessageDialog(null, "Faltan campos por completar", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }
+
+    @FXML
+    public void registerSale() {
+        if (!txtClienteVenta.getText().isEmpty() && !ventaController.ventaList.isEmpty()) {
+            ventaController.addSale();
+            inventarioController.showInventario(tableInventario, idVentaColumn, vendedorColumn, totalColumn, fechaVentaColumn);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un cliente y agregar productos a la venta", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
     public void printProductos(){ productPrint.printProducts();}
     public void printCompras(){buyResPrint.printProducts();}
     public void printInsimos(){insumosPrint.printProducts();}
