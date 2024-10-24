@@ -58,30 +58,34 @@ public class InsumosPrint {
 
                 PdfPTable headerTable = new PdfPTable(2);
                 headerTable.setWidthPercentage(100);
-                headerTable.setSpacingBefore(20f);
+                headerTable.setWidths(new float[]{1f, 3f});
 
                 PdfPCell imageCell = new PdfPCell();
-                InputStream inputStream = getClass().getResourceAsStream("/assets/logos/Logo.png");
+                InputStream inputStream = getClass().getResourceAsStream("/com/mycompany/caniceria_sf/assets/logos/Logo.png");
                 if (inputStream != null) {
                     Image logo = Image.getInstance(ImageIO.read(inputStream), null);
-                    logo.scaleAbsolute(100f, 100f);
+                    logo.scaleAbsolute(80f, 80f);
+                    logo.setAlignment(Element.ALIGN_CENTER);
                     imageCell.addElement(logo);
                 } else {
                     System.out.println("El archivo de logo no se encontró.");
                 }
                 imageCell.setBorder(Rectangle.NO_BORDER);
+                imageCell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 headerTable.addCell(imageCell);
+
 
                 PdfPCell textCell = new PdfPCell();
                 Paragraph headerText = new Paragraph();
                 headerText.setFont(headerFont);
+                headerText.setAlignment(Element.ALIGN_CENTER);
                 headerText.add("Chavez Meat\n");
                 headerText.add("Dirección: La Carrera N.de.S\n");
                 headerText.add("Teléfono: 3223126566\n");
                 headerText.add("COMPRA DE INSUMOS\n");
                 textCell.addElement(headerText);
                 textCell.setBorder(Rectangle.NO_BORDER);
-                textCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                textCell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 headerTable.addCell(textCell);
 
                 productsList.add(headerTable);

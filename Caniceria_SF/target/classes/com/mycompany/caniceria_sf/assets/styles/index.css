@@ -284,7 +284,7 @@
 
 .label-user {
     -fx-font-size: 20px;
-    -fx-font-weight: Mediun;
+    -fx-font-weight: bold;
     -fx-text-alignment: center;
     -fx-text-fill: linear-gradient(
         from 0% 0% to 100% 100%,

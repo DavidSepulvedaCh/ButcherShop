@@ -69,7 +69,7 @@
   -fx-border-radius: 8;
   -fx-border-width: 1;
   -fx-text-fill: #ffffff;
-  -fx-prompt-text-fill: derive(-fx-background-color, -50%);
+  -fx-prompt-text-fill: gray;
   -fx-font-size: 15px;
   -fx-font-family: "Segoe UI", sans-serif;
 }

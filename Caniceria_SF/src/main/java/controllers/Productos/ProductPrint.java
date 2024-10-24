@@ -62,7 +62,7 @@ public class ProductPrint {
                 headerTable.setSpacingBefore(20f);
 
                 PdfPCell imageCell = new PdfPCell();
-                InputStream inputStream = getClass().getResourceAsStream("/assets/logos/Logo.png");
+                InputStream inputStream = getClass().getResourceAsStream("/com/mycompany/caniceria_sf/assets/logos/Logo.png");
                 if (inputStream != null) {
                     Image logo = Image.getInstance(ImageIO.read(inputStream), null);
                     logo.scaleAbsolute(100f, 100f);
